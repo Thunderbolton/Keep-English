@@ -1,11 +1,8 @@
-import express from 'express';
+import express, { Application, Request, Response } from 'express';
 
-const app = express();
+const app: Application = express();
 
-const add = (a: number, b: number): number => a + b;
-
-app.get('/', (req, res) => {
-    console.log(add(5, 5))
+app.get('/', (req: Request, res: Response) => {
     res.send('start');
 })
 
