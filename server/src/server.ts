@@ -8,8 +8,6 @@ connectDB()
 
 const app: Application = express();
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('start');
-})
+app.use('/api/entries', require('../routes/entryRoutes.js'))
 
 app.listen(port, () => console.log(`server running on ${port}`));
