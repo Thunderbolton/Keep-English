@@ -9,5 +9,8 @@ const connectDB = require('../config/db.js');
 const port = process.env.PORT || 5000;
 connectDB();
 const app = (0, express_1.default)();
+// Middleware for accessing body data
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: false }));
 app.use('/api/entries', require('../routes/entryRoutes.js'));
 app.listen(port, () => console.log(`server running on ${port}`));
