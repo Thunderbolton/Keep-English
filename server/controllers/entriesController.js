@@ -1,6 +1,9 @@
+const Entry = require('../models/entryModel')
+
 // GET - /api/entries
 const getEntries = async (req, res) => {
-    res.status(200).json({ message: 'get entries'})
+    const entries = await Entry.find()
+    res.status(200).json(entries)
 }
 
 // POST - /api/entries
@@ -8,7 +11,10 @@ const createEntry = async (req, res) => {
     if (!req.body.text) {
         res.status(400).json({ message: 'please add entry' })
     }
-    res.status(200).json({ message: 'create entry'})
+    const entry = await Entry.create({
+        text: req.body.text
+    })
+    res.status(200).json(entry)
 }
 
 // PUT - /api/entries/:id
