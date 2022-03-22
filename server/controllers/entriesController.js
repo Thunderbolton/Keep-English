@@ -8,11 +8,16 @@ const getEntries = async (req, res) => {
 
 // POST - /api/entries
 const createEntry = async (req, res) => {
-    if (!req.body.text) {
-        res.status(400).json({ message: 'please add entry' })
+    if (!req.body.title) {
+        res.status(400).json({ message: 'please add title' })
     }
+    if (!req.body.comments) {
+        res.status(400).json({ message: 'please add comments' })
+    }
+
     const entry = await Entry.create({
-        text: req.body.text
+        title: req.body.title,
+        comments: req.body.comments
     })
     res.status(200).json(entry)
 }

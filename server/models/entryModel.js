@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
 const entrySchema = new Schema({
-    text: String,
+    title: String,
+    comments: String,
 }, { 
     timestamps: true,
 });
