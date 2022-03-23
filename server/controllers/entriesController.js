@@ -24,12 +24,29 @@ const createEntry = async (req, res) => {
 
 // PUT - /api/entries/:id
 const updateEntry = async (req, res) => {
-    res.status(200).json({ message: 'update entry'})
+    const entry = await Entry.findById(req.params.id)
+
+    if(!entry) {
+        res.status(400).json({ message: 'Could not find entry.' })
+    }
+
+    const updatedEntry = await Entry.findByIdAndUpdate(req.params.id, req.body, {new: true,})
+
+    res.status(200).json(updatedEntry)
 }
 
 // DELETE - /api/entries/:id
 const deleteEntry = async (req, res) => {
-    res.status(200).json({ message: 'delete entry'})
+
+    const entry = await Entry.findById(req.params.id)
+
+    if(!entry) {
+        res.status(400).json({ message: 'Could not find entry.' })
+    }
+    
+    await entry.deleteOne()
+
+    res.status(200).json({id: req.params.id})
 }
 
 
