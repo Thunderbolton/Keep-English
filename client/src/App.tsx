@@ -1,10 +1,12 @@
-import React from 'react';
 import './App.css';
+import EntryForm from './components/EntryForm';
+import Header from './components/Header';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <h2>Keep English</h2>
+      <Header />
+      <EntryForm title='Entry form' />
     </div>
   );
 }
