@@ -1,4 +1,3 @@
-import './App.css';
 import EntryForm from './components/EntryForm';
 import Header from './components/Header';
 
