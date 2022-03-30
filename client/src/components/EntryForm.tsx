@@ -1,46 +1,48 @@
-import { Typography, Button, Select, TextField, InputLabel, FormControl, MenuItem } from '@mui/material';
+import { Typography, Button, TextField, InputLabel, FormControl, MenuItem } from '@mui/material';
+import { Box } from '@mui/system';
 
 export type EntryFormProps = {
     title: string
 }
 
-
 const EntryForm = (props: EntryFormProps) => {
+
   return (
     <div>
+
       <Typography variant='h4'>{props.title}</Typography>
-      
-      <form action="" className="entry-form">
-        <TextField 
-          className="entry-form-input" 
-          label="Title" 
-          variant="outlined" 
+      <Box 
+        sx={{my: 5}}>      
+        <form action="" className="entry-form">
+          <TextField 
+            sx={{my: 2}}
+            label="Title" 
+            variant="outlined" 
           />
-          
-        <FormControl variant="outlined">
-          <InputLabel id="demo-simple-select-label">Category</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Category"
-          >
-            <MenuItem value={"Daily"}>Daily</MenuItem>
-            <MenuItem value={"Business"}>Business</MenuItem>
-            <MenuItem value={"Travel"}>Travel</MenuItem>
-            <MenuItem value={"Exam"}>Exam</MenuItem>
-          </Select>
-        </FormControl>
 
-        <TextField
-          label="Notes"
-          className="entry-form-input"
-          multiline
-          rows={4}
-        />
-    
-      </form>
+          <FormControl>
+            <InputLabel id="select-label"></InputLabel>
+            <TextField 
+              sx={{my: 2}}
+              label="Category"
+              select
+            >
+              <MenuItem value={"Daily"}>Daily</MenuItem>
+              <MenuItem value={"Business"}>Business</MenuItem>
+              <MenuItem value={"Travel"}>Travel</MenuItem>
+              <MenuItem value={"Exam"}>Exam</MenuItem>
+            </TextField>
+          </FormControl>
 
-      <Button variant='contained' className="entry-button">Add Entry</Button>
+          <TextField 
+            sx={{mt: 2, mb: 1}}
+            label="Notes"
+            multiline
+            rows={4}
+          />
+        </form>
+      </Box>
+      <Button variant='contained'>Add Entry</Button>
     </div>
   );
 }
