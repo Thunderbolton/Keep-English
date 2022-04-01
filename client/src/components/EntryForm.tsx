@@ -5,6 +5,11 @@ export type EntryFormProps = {
     title: string
 }
 
+const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  e.preventDefault()
+  console.log('sumbitted');
+}
+
 const EntryForm = (props: EntryFormProps) => {
 
   return (
@@ -13,11 +18,12 @@ const EntryForm = (props: EntryFormProps) => {
       <Typography variant='h4'>{props.title}</Typography>
       <Box 
         sx={{my: 5}}>      
-        <form action="" className="entry-form">
+        <form action="" className="entry-form" onSubmit={handleSubmit}>
           <TextField 
             sx={{my: 2}}
             label="Title" 
             variant="outlined" 
+            required
           />
 
           <FormControl>
@@ -26,11 +32,12 @@ const EntryForm = (props: EntryFormProps) => {
               sx={{my: 2}}
               label="Category"
               select
+              required
             >
-              <MenuItem value={"Daily"}>Daily</MenuItem>
-              <MenuItem value={"Business"}>Business</MenuItem>
-              <MenuItem value={"Travel"}>Travel</MenuItem>
-              <MenuItem value={"Exam"}>Exam</MenuItem>
+              <MenuItem value="Daily">Daily</MenuItem>
+              <MenuItem value="Business">Business</MenuItem>
+              <MenuItem value="Travel">Travel</MenuItem>
+              <MenuItem value="Exam">Exam</MenuItem>
             </TextField>
           </FormControl>
 
@@ -39,10 +46,13 @@ const EntryForm = (props: EntryFormProps) => {
             label="Notes"
             multiline
             rows={4}
+            required
           />
+
+        <Button variant='contained' type='submit'>Add Entry</Button>
         </form>
       </Box>
-      <Button variant='contained'>Add Entry</Button>
+      
     </div>
   );
 }
