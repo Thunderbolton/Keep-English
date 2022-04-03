@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Typography, Button, TextField, InputLabel, FormControl, MenuItem } from '@mui/material';
 import { Box } from '@mui/system';
 
@@ -8,6 +9,15 @@ export type EntryFormProps = {
 const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
   e.preventDefault()
   console.log('sumbitted');
+}
+
+const getEntries = () => {
+  axios.get("http://localhost:5000/api/entries")
+  .then(response => {
+    console.log(response.data);
+  }, error => {
+    console.log(error);
+  });
 }
 
 const EntryForm = (props: EntryFormProps) => {
@@ -51,6 +61,8 @@ const EntryForm = (props: EntryFormProps) => {
 
         <Button variant='contained' type='submit'>Add Entry</Button>
         </form>
+
+        <Button onClick={getEntries}>get entries</Button>
       </Box>
       
     </div>
