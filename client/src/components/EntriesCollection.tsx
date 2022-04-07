@@ -1,16 +1,19 @@
-// import { useEffect } from 'react';
-
 
 interface Props {
     entries: string[]
-    setEntries: React.Dispatch<React.SetStateAction<string[]>>
+    createdAt?: string[]
 }
 
-const EntriesCollection = ({entries, setEntries}: Props) => {
+const EntriesCollection = ({entries}: Props) => {
+    console.log(entries)
 
     return (
       <div>
-          
+          <h1>Entries collection</h1>
+
+          {entries.map((entry) => (
+            <li>{entry.createdAt}</li>
+          ))}
       </div>
     );
   }

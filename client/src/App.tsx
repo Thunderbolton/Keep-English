@@ -14,7 +14,8 @@ const App = () => {
     const fetchEntries = async () => {
     const result = await axios(`http://localhost:5000/api/entries`)
     
-    console.log(result.data)
+    // console.log(result.data)
+
     setEntries(result.data)
   }
     fetchEntries()
@@ -24,7 +25,7 @@ const App = () => {
     <div className="App">
       <Header />
       <EntryForm title='Entry form' />
-      <EntriesCollection entries={entries} setEntries={setEntries}/>
+      <EntriesCollection entries={entries}/>
     </div>
   );
 }
