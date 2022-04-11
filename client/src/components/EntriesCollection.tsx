@@ -1,18 +1,11 @@
-
-interface Props {
-    entries: string[]
-    createdAt?: string[]
-}
-
-const EntriesCollection = ({entries}: Props) => {
-    console.log(entries)
+const EntriesCollection = ({entries} : {entries:any}) => {
 
     return (
       <div>
           <h1>Entries collection</h1>
 
-          {entries.map((entry) => (
-            <li>{entry.createdAt}</li>
+          {entries.map((entry:any) => (
+            <li>{entry._id}</li>
           ))}
       </div>
     );

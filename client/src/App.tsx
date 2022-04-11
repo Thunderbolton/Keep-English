@@ -5,18 +5,26 @@ import EntriesCollection from './components/EntriesCollection';
 import EntryForm from './components/EntryForm';
 import Header from './components/Header';
 
+interface Entry {
+  comments: string
+  createdAt: number
+  title: string
+  text: string
+  updatedAt: number
+  _id: number
+}
 
 const App = () => {
 
-  const [entries, setEntries] = useState<string[]>([])
+  const [entries, setEntries] = useState<Entry[]>([])
 
   useEffect(() => {
     const fetchEntries = async () => {
-    const result = await axios(`http://localhost:5000/api/entries`)
+    const response = await axios.get<Entry[]>(`http://localhost:5000/api/entries`)
     
-    // console.log(result.data)
-
-    setEntries(result.data)
+    setEntries(response.data)
+    
+    // console.log("Response: ", response.data)
   }
     fetchEntries()
   },[])
@@ -25,7 +33,7 @@ const App = () => {
     <div className="App">
       <Header />
       <EntryForm title='Entry form' />
-      <EntriesCollection entries={entries}/>
+      <EntriesCollection entries={entries} />
     </div>
   );
 }
