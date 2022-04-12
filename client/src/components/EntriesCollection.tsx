@@ -1,3 +1,6 @@
+import { Card } from '@mui/material';
+
+
 const EntriesCollection = ({entries} : {entries:any}) => {
 
     return (
@@ -5,7 +8,14 @@ const EntriesCollection = ({entries} : {entries:any}) => {
           <h1>Entries collection</h1>
 
           {entries.map((entry:any) => (
-            <li>{entry._id}</li>
+            <ul>
+              <Card variant='outlined'>
+                <li>{entry._id}</li>
+                <li>{entry.text}</li>
+              </Card>
+            </ul>
+            
+            
           ))}
       </div>
     );

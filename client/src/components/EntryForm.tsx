@@ -10,8 +10,6 @@ const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
   console.log('sumbitted');
 }
 
-
-
 const EntryForm = (props: EntryFormProps) => {
 
   return (
