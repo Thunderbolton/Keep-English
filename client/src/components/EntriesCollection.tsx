@@ -1,4 +1,6 @@
-import { Card } from '@mui/material';
+import { Card, CardContent, CardHeader, IconButton } from '@mui/material';
+// import { MoreVertIcon } from '@mui/icons-material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
 const EntriesCollection = ({entries} : {entries:any}) => {
@@ -8,12 +10,22 @@ const EntriesCollection = ({entries} : {entries:any}) => {
           <h1>Entries collection</h1>
 
           {entries.map((entry:any) => (
-            <ul>
-              <Card variant='outlined'>
-                <li>{entry._id}</li>
-                <li>{entry.text}</li>
+            
+              <Card variant='outlined' sx={{ maxWidth: 450, minHeight: 350 }}>
+                <CardHeader 
+                  title={entry.text} 
+                  subheader={entry.createdAt}
+                  action={
+                    <IconButton aria-label="settings">
+                      <MoreVertIcon />
+                    </IconButton>
+                  }
+                />
+                <CardContent>
+                  <li>{entry._id}</li>
+                </CardContent>
               </Card>
-            </ul>
+          
             
             
           ))}
