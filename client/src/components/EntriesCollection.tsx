@@ -1,6 +1,5 @@
-import { Card, CardContent, CardHeader, Container, Grid, IconButton } from '@mui/material';
-// import { MoreVertIcon } from '@mui/icons-material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Card, CardActions, CardContent, CardHeader, Container, Grid, IconButton, Tooltip } from '@mui/material';
+import { Edit, Favorite, Delete, ExpandMore } from '@material-ui/icons';
 
 
 const EntriesCollection = ({entries} : {entries:any}) => {
@@ -13,19 +12,29 @@ const EntriesCollection = ({entries} : {entries:any}) => {
 
               {entries.map((entry:any) => (
 
-              <Card variant='outlined' sx={{ maxWidth: 450, minHeight: 350 }}>
+              <Card elevation={2} sx={{ maxWidth: 450, minHeight: 350 }}>
                 <CardHeader 
                   title={entry.text} 
                   subheader={entry.createdAt}
                   action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
+                    <Tooltip title="Edit" placement="top">
+                      <IconButton aria-label="settings">
+                        <Edit />
+                      </IconButton>
+                    </Tooltip>
+                    
                   }
                 />
                 <CardContent>
                   <li>{entry._id}</li>
                 </CardContent>
+                <CardActions>
+                  <Tooltip title="Delete">
+                    <IconButton>
+                      <Delete />
+                    </IconButton>
+                  </Tooltip>
+                </CardActions>  
               </Card>
 
               ))}
