@@ -1,6 +1,6 @@
 import EntryCard from './EntryCard';
 
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 
 const EntriesCollection = ({entries} : {entries:any}) => {
 
@@ -9,7 +9,13 @@ const EntriesCollection = ({entries} : {entries:any}) => {
           <h1>Entries collection</h1>
           
           <Container>
-              <EntryCard entries={entries}/>
+            <Grid container justifyContent="space-evenly" alignItems="center" gap={4}>
+              {entries.map((entry:any) => (
+                <Grid item>
+                  <EntryCard entries={entry} />
+                </Grid>
+              ))}  
+            </Grid>  
           </Container>
           
           
