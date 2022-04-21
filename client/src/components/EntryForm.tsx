@@ -1,5 +1,6 @@
-import { Typography, Button, TextField, InputLabel, FormControl, MenuItem } from '@mui/material';
+import { Typography, Button, TextField, InputLabel, FormControl, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import { Box } from '@mui/system';
+import { useState } from 'react';
 
 export type EntryFormProps = {
     title: string
@@ -10,7 +11,12 @@ const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
   console.log('sumbitted');
 }
 
+// Radio buttons state
+
+
 const EntryForm = (props: EntryFormProps) => {
+
+  const [value, setValue] = useState('Daily');
 
   return (
     <div>
@@ -27,7 +33,7 @@ const EntryForm = (props: EntryFormProps) => {
           />
 
           <FormControl>
-            <InputLabel id="select-label"></InputLabel>
+            {/* <InputLabel id="select-label"></InputLabel>
             <TextField 
               sx={{my: 2}}
               label="Category"
@@ -38,7 +44,20 @@ const EntryForm = (props: EntryFormProps) => {
               <MenuItem value="Business">Business</MenuItem>
               <MenuItem value="Travel">Travel</MenuItem>
               <MenuItem value="Exam">Exam</MenuItem>
-            </TextField>
+            </TextField> */}
+            <FormLabel id="demo-controlled-radio-buttons-group">Category</FormLabel>
+              <RadioGroup
+                aria-labelledby="demo-controlled-radio-buttons-group"
+                name="controlled-radio-buttons-group"
+                value={value}
+                // onChange={handleChange}
+                sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}
+              >
+                <FormControlLabel value="Daily" control={<Radio />} label="Daily" />
+                <FormControlLabel value="Business" control={<Radio />} label="Business" />
+                <FormControlLabel value="Travel" control={<Radio />} label="Travel" />
+                <FormControlLabel value="Exam" control={<Radio />} label="Exam" />
+              </RadioGroup>
           </FormControl>
 
           <TextField 
