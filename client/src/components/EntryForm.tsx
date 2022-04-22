@@ -1,4 +1,4 @@
-import { Typography, Button, TextField, InputLabel, FormControl, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import { Typography, Button, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import { Box } from '@mui/system';
 import { useState } from 'react';
 
@@ -11,16 +11,19 @@ const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
   console.log('sumbitted');
 }
 
-// Radio buttons state
-
 
 const EntryForm = (props: EntryFormProps) => {
 
+  // Radio buttons state
   const [value, setValue] = useState('Daily');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue((event.target as HTMLInputElement).value);
+  };
+
 
   return (
     <div>
-
       <Typography variant='h4'>{props.title}</Typography>
       <Box 
         sx={{my: 5}}>      
@@ -32,26 +35,15 @@ const EntryForm = (props: EntryFormProps) => {
             required
           />
 
-          <FormControl>
-            {/* <InputLabel id="select-label"></InputLabel>
-            <TextField 
-              sx={{my: 2}}
-              label="Category"
-              select
-              required
-            >
-              <MenuItem value="Daily">Daily</MenuItem>
-              <MenuItem value="Business">Business</MenuItem>
-              <MenuItem value="Travel">Travel</MenuItem>
-              <MenuItem value="Exam">Exam</MenuItem>
-            </TextField> */}
+          <FormControl sx={{border: 1, borderColor:'#0000003b', borderRadius:1}}>
             <FormLabel id="demo-controlled-radio-buttons-group">Category</FormLabel>
               <RadioGroup
-                aria-labelledby="demo-controlled-radio-buttons-group"
-                name="controlled-radio-buttons-group"
+                aria-labelledby="radio-buttons-group"
+                name="radio-buttons-group"
+                row
+                sx={{margin: 'auto'}}
                 value={value}
-                // onChange={handleChange}
-                sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}
+                onChange={handleChange}
               >
                 <FormControlLabel value="Daily" control={<Radio />} label="Daily" />
                 <FormControlLabel value="Business" control={<Radio />} label="Business" />
