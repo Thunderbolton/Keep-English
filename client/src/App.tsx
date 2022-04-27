@@ -25,15 +25,24 @@ const App = () => {
     setEntries(response.data)
     
     // console.log("Response: ", response.data)
+
+    // console.log(response.data)
   }
     fetchEntries()
   },[])
+
+  const deleteEntry = async (_id: number) => {
+      await axios.delete(`http://localhost:5000/api/entries${_id}`)
+
+      const filteredEntries = entries.filter(entry => entry._id !== _id)
+      setEntries(filteredEntries)
+  }
 
   return (
     <div className="App">
       <Header />
       <EntryForm title='Entry form' />
-      <EntriesCollection entries={entries} />
+      <EntriesCollection entries={entries}/>
     </div>
   );
 }

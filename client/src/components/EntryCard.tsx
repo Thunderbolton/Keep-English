@@ -23,7 +23,7 @@ const EntryCard = ({entries} : {entries:any}) => {
                 </CardContent>
                 <CardActions>
                     <Tooltip title="Delete">
-                        <IconButton>
+                        <IconButton onClick={() => console.log('delete', entries.text)}>
                             <Delete />
                         </IconButton>
                     </Tooltip>
