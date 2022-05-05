@@ -2,7 +2,7 @@ import EntryCard from './EntryCard';
 
 import { Container, Grid } from '@mui/material';
 
-const EntriesCollection = ({entries} : {entries:any}) => {
+const EntriesCollection = ({entries, deleteEntry} : {entries:any, deleteEntry:any}) => {
 
     return (
       <div>

@@ -12,6 +12,7 @@ interface Entry {
   text: string
   updatedAt: number
   _id: number
+  // deleteEntry: (_id: number) => void;
 }
 
 const App = () => {
@@ -42,7 +43,7 @@ const App = () => {
     <div className="App">
       <Header />
       <EntryForm title='Entry form' />
-      <EntriesCollection entries={entries}/>
+      <EntriesCollection entries={entries} deleteEntry={deleteEntry} />
     </div>
   );
 }
