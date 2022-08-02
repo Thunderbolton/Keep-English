@@ -2,7 +2,7 @@ const Entry = require('../models/entryModel')
 
 // GET - /api/entries
 const getEntries = async (req, res) => {
-    const entries = await Entry.find()
+    const entries = await Entry.find().sort({'updatedAt': -1})
     res.status(200).json(entries)
 }
 
