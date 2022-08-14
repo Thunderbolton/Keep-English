@@ -11,7 +11,7 @@ const EntriesCollection = ({entries, deleteEntry} : {entries:any, deleteEntry:an
           <Container>
             <Grid container justifyContent="space-evenly" alignItems="center" gap={4}>
               {entries.map((entry:any) => (
-                <Grid item>
+                <Grid item key={entry._id}>
                   <EntryCard entries={entry} />
                 </Grid>
               ))}  

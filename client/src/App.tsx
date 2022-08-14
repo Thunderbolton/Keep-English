@@ -33,7 +33,7 @@ const App = () => {
   },[])
 
   const deleteEntry = async (_id: number) => {
-      await axios.delete(`http://localhost:5000/api/entries${_id}`)
+      await axios.delete(`http://localhost:5000/api/entries/${_id}`)
 
       const filteredEntries = entries.filter(entry => entry._id !== _id)
       setEntries(filteredEntries)
