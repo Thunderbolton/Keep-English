@@ -43,7 +43,7 @@ const App = () => {
     <div className="App">
       <Header />
       <EntryForm title='Entry form' />
-      <EntriesCollection entries={entries} deleteEntry={deleteEntry} />
+      <EntriesCollection entries={entries} />
     </div>
   );
 }
