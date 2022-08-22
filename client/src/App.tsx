@@ -42,7 +42,7 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <EntryForm title='Entry form' />
+      <EntryForm />
       <EntriesCollection entries={entries} />
     </div>
   );

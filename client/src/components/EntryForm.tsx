@@ -2,9 +2,6 @@ import { Typography, Button, TextField, FormControl, FormLabel, RadioGroup, Form
 import { Box } from '@mui/system';
 import { useState } from 'react';
 
-export type EntryFormProps = {
-    title: string
-}
 
 const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
   e.preventDefault()
@@ -12,7 +9,7 @@ const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
 }
 
 
-const EntryForm = (props: EntryFormProps) => {
+const EntryForm = () => {
 
   // Radio buttons state
   const [value, setValue] = useState('Daily');
@@ -24,7 +21,7 @@ const EntryForm = (props: EntryFormProps) => {
 
   return (
     <div>
-      <Typography variant='h4'>{props.title}</Typography>
+      <Typography variant='h4'>Entry Form</Typography>
       <Box 
         sx={{my: 5}}>      
         <form action="" className="entry-form" onSubmit={handleSubmit}>
