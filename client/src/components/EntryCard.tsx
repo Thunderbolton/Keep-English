@@ -20,7 +20,7 @@ const EntryCard = ({entries} : {entries:any}) => {
         <div>
             <Card elevation={2} sx={{ maxWidth: 450, minHeight: 350 }}>
                 <CardHeader 
-                title={entries.text} 
+                title={entries.title} 
                 subheader={entries.createdAt}
                 action={
                     <Tooltip title="Edit" placement="top">
@@ -32,6 +32,7 @@ const EntryCard = ({entries} : {entries:any}) => {
                 />
                 <CardContent>
                     <li>{entries._id}</li>
+                    <p>{entries.comments}</p>
                 </CardContent>
                 <CardActions>
                     <Tooltip title="Delete">

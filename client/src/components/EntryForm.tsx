@@ -9,6 +9,10 @@ const EntryForm = () => {
   // Radio buttons state
   const [value, setValue] = useState('Daily');
 
+  const [title, setTitle] = useState('');
+  const [comments, setComments] = useState('');
+
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue((e.target as HTMLInputElement).value);
   };
@@ -16,14 +20,20 @@ const EntryForm = () => {
   // Submitting form & adding new entry
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
-  
-    const response = await axios.post('/api/entries', {
-      title: 'new entry',
-      comments: 'This is a test for adding a new entry'
-    })
-    console.log(response);
-  }
 
+    try {
+      const response = await axios.post('/api/entries', {title: title, comments: comments});
+      console.log(response.data)
+      console.log(response)
+    }
+    catch (error) {
+      console.log(error)
+    }
+    finally {
+      setTitle('')
+      setComments('')
+    }
+  }
 
   return (
     <div>
@@ -33,6 +43,8 @@ const EntryForm = () => {
         <form action="" className="entry-form" onSubmit={handleSubmit}>
           <TextField 
             sx={{my: 3}}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             label="Title" 
             variant="outlined" 
             required
@@ -57,6 +69,8 @@ const EntryForm = () => {
 
           <TextField 
             sx={{mt: 2, mb: 1}}
+            value={comments}
+            onChange={(e) => setComments(e.target.value)}
             label="Notes"
             multiline
             rows={4}

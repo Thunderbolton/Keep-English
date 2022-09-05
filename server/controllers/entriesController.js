@@ -8,18 +8,19 @@ const getEntries = async (req, res) => {
 
 // POST - /api/entries
 const createEntry = async (req, res) => {
-    if (!req.body.title) {
-        res.status(400).json({ message: 'please add title' })
+    const {title, comments} = req.body
+    // if (!req.body.title) {
+    //     res.status(400).json({ message: 'please add title' })
+    // }
+    // if (!req.body.comments) {
+    //     res.status(400).json({ message: 'please add comments' })
+    // }
+    try {
+        const entry = await Entry.create({title, comments})
+        res.status(200).json(entry)
+    } catch (error) {
+        res.status(400).json({error: error.message})
     }
-    if (!req.body.comments) {
-        res.status(400).json({ message: 'please add comments' })
-    }
-
-    const entry = await Entry.create({
-        title: req.body.title,
-        comments: req.body.comments
-    })
-    res.status(200).json(entry)
 }
 
 // PUT - /api/entries/:id
