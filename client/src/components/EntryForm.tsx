@@ -2,9 +2,13 @@ import { Typography, Button, TextField, FormControl, FormLabel, RadioGroup, Form
 import { Box } from '@mui/system';
 import axios from 'axios';
 import { useState } from 'react';
+import { useEntriesContext } from '../context/useEntriesContext';
 
 
 const EntryForm = () => {
+
+
+  const { dispatch } = useEntriesContext()
 
   // Radio buttons state
   const [value, setValue] = useState('Daily');
@@ -23,8 +27,11 @@ const EntryForm = () => {
 
     try {
       const response = await axios.post('/api/entries', {title: title, comments: comments});
-      console.log(response.data)
-      console.log(response)
+      // console.log(response.data)
+      // console.log(response)
+      if (response.data) {
+        dispatch({type: 'create_entry', payload: response.data})
+      }
     }
     catch (error) {
       console.log(error)

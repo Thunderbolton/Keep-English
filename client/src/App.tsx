@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import EntriesCollection from './components/EntriesCollection';
 import EntryForm from './components/EntryForm';
 import Header from './components/Header';
+import { useEntriesContext } from './context/useEntriesContext';
 
 interface Entry {
   comments: string
@@ -12,32 +13,33 @@ interface Entry {
   text: string
   updatedAt: number
   _id: number
-  // deleteEntry: (_id: number) => void;
 }
 
 const App = () => {
 
-  const [entries, setEntries] = useState<Entry[]>([])
+  // const [entries, setEntries] = useState<Entry[]>([])
+
+  const { entries, dispatch } = useEntriesContext()
 
   useEffect(() => {
     const fetchEntries = async () => {
     const response = await axios.get<Entry[]>(`http://localhost:5000/api/entries`)
     
-    setEntries(response.data)
-    
-    // console.log("Response: ", response.data)
-
+    // setEntries(response.data)
+    if(response) {
+       dispatch({type: 'set_entries', payload: response.data})
+    }
     // console.log(response.data)
   }
     fetchEntries()
   },[])
 
-  const deleteEntry = async (_id: number) => {
-      await axios.delete(`http://localhost:5000/api/entries/${_id}`)
+  // const deleteEntry = async (_id: number) => {
+  //     await axios.delete(`http://localhost:5000/api/entries/${_id}`)
 
-      const filteredEntries = entries.filter(entry => entry._id !== _id)
-      setEntries(filteredEntries)
-  }
+  //     const filteredEntries = entries.filter(entry => entry._id !== _id)
+  //     setEntries(filteredEntries)
+  // }
 
   return (
     <div className="App">
