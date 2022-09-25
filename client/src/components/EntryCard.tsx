@@ -2,18 +2,24 @@ import { Card, CardActions, CardContent, CardHeader, IconButton, Tooltip } from 
 import { Edit, Delete } from '@material-ui/icons';
 import axios from 'axios';
 import { useState } from 'react';
+import { useEntriesContext } from '../context/useEntriesContext';
 
 
 const EntryCard = ({entries} : {entries:any}) => {
 
-    // const [cardEntries, setCardEntries] = useState()
+    const { _id } = entries;
 
+    const { dispatch } = useEntriesContext()
 
-    const deleteEntry = async (_id: number) => {
-        await axios.delete(`http://localhost:5000/api/entries/${_id}`)
+    const deleteEntry = async () => {
+        const response = await axios.delete(`api/entries/${_id}`)
   
-        // const filteredEntries = entries.filter((entry: any) => entry._id !== _id);
-        // setCardEntries(filteredEntries)
+        if (response.data) {
+            // console.log(`Success: ${response.data}`)
+        
+            dispatch({type: 'delete_entry', payload: response.data})
+            console.log(response.data)
+        }
     }
 
     return (
@@ -36,7 +42,7 @@ const EntryCard = ({entries} : {entries:any}) => {
                 </CardContent>
                 <CardActions>
                     <Tooltip title="Delete">
-                        <IconButton onClick={() => deleteEntry(entries._id)}>
+                        <IconButton onClick={deleteEntry}>
                             <Delete />
                         </IconButton>
                     </Tooltip>

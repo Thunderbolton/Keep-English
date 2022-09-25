@@ -25,21 +25,12 @@ const App = () => {
     const fetchEntries = async () => {
     const response = await axios.get<Entry[]>(`http://localhost:5000/api/entries`)
     
-    // setEntries(response.data)
     if(response) {
        dispatch({type: 'set_entries', payload: response.data})
     }
-    // console.log(response.data)
   }
     fetchEntries()
   },[])
-
-  // const deleteEntry = async (_id: number) => {
-  //     await axios.delete(`http://localhost:5000/api/entries/${_id}`)
-
-  //     const filteredEntries = entries.filter(entry => entry._id !== _id)
-  //     setEntries(filteredEntries)
-  // }
 
   return (
     <div className="App">

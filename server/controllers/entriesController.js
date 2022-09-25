@@ -9,12 +9,7 @@ const getEntries = async (req, res) => {
 // POST - /api/entries
 const createEntry = async (req, res) => {
     const {title, comments} = req.body
-    // if (!req.body.title) {
-    //     res.status(400).json({ message: 'please add title' })
-    // }
-    // if (!req.body.comments) {
-    //     res.status(400).json({ message: 'please add comments' })
-    // }
+    
     try {
         const entry = await Entry.create({title, comments})
         res.status(200).json(entry)
@@ -40,14 +35,14 @@ const updateEntry = async (req, res) => {
 const deleteEntry = async (req, res) => {
 
     const entry = await Entry.findById(req.params.id)
+    
+    await entry.deleteOne()
 
     if(!entry) {
         res.status(400).json({ message: 'Could not find entry.' })
     }
-    
-    await entry.deleteOne()
 
-    res.status(200).json({id: req.params.id})
+    res.status(200).json(entry)
 }
 
 
