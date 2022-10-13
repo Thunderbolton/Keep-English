@@ -14,15 +14,7 @@ const EntryCard = ({entries} : {entries:any}) => {
 
     const { _id } = entries;
     const { dispatch } = useEntriesContext()
-    
-    // Expand card state
-    const [expanded, setExpanded] = useState(false);
-    const [expandedColor, setExpandedColor] = useState(true);  
-
-        const handleExpandClick = () => {
-            setExpanded(!expanded);
-            setExpandedColor(!expandedColor);
-        };
+      
 
     const dateOptions: Intl.DateTimeFormatOptions = {
         weekday: 'long',
@@ -30,6 +22,16 @@ const EntryCard = ({entries} : {entries:any}) => {
         month: 'long',
         day: 'numeric',
     };
+
+    // Expand card state
+    const [expanded, setExpanded] = useState(false);
+    const [expandedColor, setExpandedColor] = useState(true);
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+        setExpandedColor(!expandedColor);
+    };
+
 
     interface ExpandMoreProps extends IconButtonProps {
         expand: boolean;
@@ -91,31 +93,23 @@ const EntryCard = ({entries} : {entries:any}) => {
                         <Tooltip {...expandButtonProps} placement="top">
                             <ExpandMoreIcon/>
                         </Tooltip> 
-                    </ExpandMore>    
-                        
-                    
+                    </ExpandMore>     
                 }
                 />
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <Typography paragraph>Method:</Typography>
                         <Typography paragraph>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates nesciunt, placeat, numquam eveniet recusandae quam
+                            <p>{entries.comments}</p>
+                            {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ab eveniet consequatur quasi voluptatem laudantium ea ipsum aliquid, nihil deleniti veritatis voluptate esse unde quisquam ipsa, dolorum quia at odio?
+                            Deleniti quis molestias rerum mollitia consectetur quae facere doloribus minima fuga culpa qui, vitae tempora ea corporis voluptate similique inventore dolorem debitis vel ducimus necessitatibus facilis. Ullam velit alias quae?
+                            Officia ratione beatae minus culpa ducimus ipsa tempore, voluptatum at earum. Ut facere optio fugit dignissimos voluptates veritatis eius cum repellendus animi iusto, recusandae cupiditate blanditiis molestiae praesentium quibusdam? Dolorum. */}
                         </Typography>
-                        <Typography paragraph>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt eligendi tempora voluptates libero dolorem quidem consequatur nostrum fuga nisi, nulla illo laborum? Odit debitis fuga libero voluptate saepe sed repellat?
-                            Quidem iusto beatae ipsam possimus vero ad veritatis doloribus rerum rem iste, molestiae dolorem. Odit, reprehenderit? Laboriosam laudantium sequi qui expedita dolore et nesciunt quia fugit, quidem, ipsa optio neque.
-                            Mollitia distinctio quo itaque alias voluptates ea cumque nesciunt eligendi perferendis eveniet dolorum sit, assumenda unde quod tenetur deserunt consequatur dolores porro nobis voluptatum dignissimos ipsam odit! Nemo, ipsa numquam?
-                        </Typography>
-                        <Typography>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo, eligendi.
-                        </Typography>
+                        
                         {expanded && <Edit />}
                     </CardContent>
                 </Collapse>
                 <CardContent>
                     <li>{entries._id}</li>
-                    <p>{entries.comments}</p>
                 </CardContent>
                 <CardActions>
                     <Tooltip title="Delete">

@@ -8,10 +8,10 @@ const getEntries = async (req, res) => {
 
 // POST - /api/entries
 const createEntry = async (req, res) => {
-    const {title, comments} = req.body
+    const {title, comments, category} = req.body
     
     try {
-        const entry = await Entry.create({title, comments})
+        const entry = await Entry.create({title, comments, category})
         res.status(200).json(entry)
     } catch (error) {
         res.status(400).json({error: error.message})
