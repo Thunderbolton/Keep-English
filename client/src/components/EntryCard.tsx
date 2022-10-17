@@ -1,8 +1,9 @@
-import { Card, CardActions, CardContent, CardHeader, Tooltip, Button } from '@mui/material';
+import { Card, CardActions, CardContent, CardHeader, Tooltip, Avatar } from '@mui/material';
 import { Edit, Delete, } from '@material-ui/icons';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
+import { blue, green, grey, orange, red } from '@mui/material/colors';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEntriesContext } from '../context/useEntriesContext';
@@ -50,7 +51,7 @@ const EntryCard = ({entries} : {entries:any}) => {
     
     const expandButtonProps = {
         title: expanded ? "Collapse" : "Expand"
-    }
+    };
       
 
     const deleteEntry = async () => {
@@ -62,7 +63,7 @@ const EntryCard = ({entries} : {entries:any}) => {
             dispatch({type: 'delete_entry', payload: response.data})
             console.log(response.data)
         }
-    }
+    };
 
 
     // const updateEntry = async () => {
@@ -79,8 +80,13 @@ const EntryCard = ({entries} : {entries:any}) => {
     return (
         <div>
             <Card elevation={2} sx={{ maxWidth: 450, minHeight: 350 }}>
-                <CardHeader 
-                title={entries.title} 
+                <CardHeader
+                avatar={
+                    entries.category && <Avatar sx={{ bgcolor: entries.category == 'Daily' ? green[400] : entries.category == 'Business' ? blue[400] : entries.category == 'Travel' ? orange[400] : entries.category == 'Exam' ? red[400] : grey[400]}}>
+                      {entries.category.charAt(0)}
+                    </Avatar>
+                  }
+                title={entries.title}
                 subheader={new Date(entries.createdAt).toLocaleString('en-GB', dateOptions)}
                 action={
                     <ExpandMore
@@ -95,6 +101,7 @@ const EntryCard = ({entries} : {entries:any}) => {
                         </Tooltip> 
                     </ExpandMore>     
                 }
+                
                 />
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
@@ -104,7 +111,6 @@ const EntryCard = ({entries} : {entries:any}) => {
                             Deleniti quis molestias rerum mollitia consectetur quae facere doloribus minima fuga culpa qui, vitae tempora ea corporis voluptate similique inventore dolorem debitis vel ducimus necessitatibus facilis. Ullam velit alias quae?
                             Officia ratione beatae minus culpa ducimus ipsa tempore, voluptatum at earum. Ut facere optio fugit dignissimos voluptates veritatis eius cum repellendus animi iusto, recusandae cupiditate blanditiis molestiae praesentium quibusdam? Dolorum. */}
                         </Typography>
-                        
                         {expanded && <Edit />}
                     </CardContent>
                 </Collapse>

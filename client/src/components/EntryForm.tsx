@@ -10,15 +10,14 @@ const EntryForm = () => {
 
   const { dispatch } = useEntriesContext()
 
-  // Radio buttons state
-  const [value, setValue] = useState('Daily');
-
+  // Entry Form state
+  const [category, setCategory] = useState('Daily');
   const [title, setTitle] = useState('');
   const [comments, setComments] = useState('');
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((e.target as HTMLInputElement).value);
+    setCategory((e.target as HTMLInputElement).value);
   };
 
   // Submitting form & adding new entry
@@ -26,7 +25,7 @@ const EntryForm = () => {
     e.preventDefault()
 
     try {
-      const response = await axios.post('/api/entries', {title: title, comments: comments});
+      const response = await axios.post('/api/entries', {title: title, comments: comments, category: category});
       // console.log(response.data)
       // console.log(response)
       if (response.data) {
@@ -64,7 +63,7 @@ const EntryForm = () => {
                 name="radio-buttons-group"
                 row
                 sx={{margin: 'auto'}}
-                value={value}
+                value={category}
                 onChange={handleChange}
               >
                 <FormControlLabel value="Daily" control={<Radio />} label="Daily" />
@@ -85,12 +84,8 @@ const EntryForm = () => {
           />
 
         <Button variant='contained' type='submit'>Add Entry</Button>
-        </form>
-
-        {/* <Button onClick={getEntries}>get entries</Button> */}
-        
+        </form> 
       </Box>
-      
     </div>
   );
 }

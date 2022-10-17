@@ -6,14 +6,14 @@ import EntryForm from './components/EntryForm';
 import Header from './components/Header';
 import { useEntriesContext } from './context/useEntriesContext';
 
-interface Entry {
-  comments: string
-  createdAt: number
-  title: string
-  text: string
-  updatedAt: number
-  _id: number
-}
+// interface Entry {
+//   // comments: string
+//   createdAt: number
+//   title: string
+//   text: string
+//   updatedAt: number
+//   _id: number
+// }
 
 const App = () => {
 
@@ -23,7 +23,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchEntries = async () => {
-    const response = await axios.get<Entry[]>(`http://localhost:5000/api/entries`)
+    const response = await axios.get(`http://localhost:5000/api/entries`)
     
     if(response) {
        dispatch({type: 'set_entries', payload: response.data})
