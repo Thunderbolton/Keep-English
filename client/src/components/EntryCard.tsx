@@ -1,4 +1,4 @@
-import { Card, CardActions, CardContent, CardHeader, Tooltip, Avatar } from '@mui/material';
+import { Avatar, Card, CardActions, CardContent, CardHeader, Collapse, MenuItem, Stack, TextField, Tooltip, Typography } from '@mui/material';
 import { Edit, Delete, } from '@material-ui/icons';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
@@ -7,16 +7,13 @@ import { blue, green, grey, orange, red } from '@mui/material/colors';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEntriesContext } from '../context/useEntriesContext';
-import Collapse from '@mui/material/Collapse';
-import Typography from '@mui/material/Typography';
 
 
-const EntryCard = ({entries} : {entries:any}) => {
+const EntryCard = ({entries} : {entries:any}, {props} : {props:any}) => {
 
     const { _id } = entries;
     const { dispatch } = useEntriesContext()
       
-
     const dateOptions: Intl.DateTimeFormatOptions = {
         weekday: 'long',
         year: 'numeric',
@@ -31,8 +28,8 @@ const EntryCard = ({entries} : {entries:any}) => {
     const handleExpandClick = () => {
         setExpanded(!expanded);
         setExpandedColor(!expandedColor);
+        setEditForm(false);
     };
-
 
     interface ExpandMoreProps extends IconButtonProps {
         expand: boolean;
@@ -52,14 +49,44 @@ const EntryCard = ({entries} : {entries:any}) => {
     const expandButtonProps = {
         title: expanded ? "Collapse" : "Expand"
     };
-      
 
+
+    // To show edit contents
+    const [editform, setEditForm] = useState(false);
+    const onClick = () => {setEditForm(!editform)};
+
+    // Select category state
+    const [category, setCategory] = useState('');
+    
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCategory((e.target as HTMLInputElement).value);
+      };
+
+
+    const EditEntry = () => (
+        <form>
+            <Stack spacing={2}>
+                <TextField size="small" label="Title" margin="dense" />
+
+                <TextField size="small" label="Category" margin="dense" select value={category} onChange={handleChange}>
+                    <MenuItem value="Daily">Daily</MenuItem> 
+                    <MenuItem value="Business">Business</MenuItem> 
+                    <MenuItem value="Travel">Travel</MenuItem> 
+                    <MenuItem value="Exam">Exam</MenuItem> 
+                </TextField> 
+                
+                <TextField size="small" label="Comments" margin="dense" multiline minRows={3} />
+                    
+            </Stack>
+                
+        </form>
+      )
+    
     const deleteEntry = async () => {
         const response = await axios.delete(`api/entries/${_id}`)
   
         if (response.data) {
             // console.log(`Success: ${response.data}`)
-        
             dispatch({type: 'delete_entry', payload: response.data})
             console.log(response.data)
         }
@@ -82,7 +109,7 @@ const EntryCard = ({entries} : {entries:any}) => {
             <Card elevation={2} sx={{ maxWidth: 450, minHeight: 350 }}>
                 <CardHeader
                 avatar={
-                    entries.category && <Avatar sx={{ bgcolor: entries.category == 'Daily' ? green[400] : entries.category == 'Business' ? blue[400] : entries.category == 'Travel' ? orange[400] : entries.category == 'Exam' ? red[400] : grey[400]}}>
+                    entries.category && <Avatar sx={{ bgcolor: entries.category === 'Daily' ? green[400] : entries.category === 'Business' ? blue[400] : entries.category === 'Travel' ? orange[400] : entries.category === 'Exam' ? red[400] : grey[400]}}>
                       {entries.category.charAt(0)}
                     </Avatar>
                   }
@@ -95,23 +122,26 @@ const EntryCard = ({entries} : {entries:any}) => {
                         onClick={handleExpandClick}
                         aria-expanded={expanded}
                         aria-label="show more"
-                    >
+                        >
                         <Tooltip {...expandButtonProps} placement="top">
                             <ExpandMoreIcon/>
                         </Tooltip> 
                     </ExpandMore>     
                 }
-                
                 />
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
                         <Typography paragraph>
-                            <p>{entries.comments}</p>
-                            {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ab eveniet consequatur quasi voluptatem laudantium ea ipsum aliquid, nihil deleniti veritatis voluptate esse unde quisquam ipsa, dolorum quia at odio?
-                            Deleniti quis molestias rerum mollitia consectetur quae facere doloribus minima fuga culpa qui, vitae tempora ea corporis voluptate similique inventore dolorem debitis vel ducimus necessitatibus facilis. Ullam velit alias quae?
-                            Officia ratione beatae minus culpa ducimus ipsa tempore, voluptatum at earum. Ut facere optio fugit dignissimos voluptates veritatis eius cum repellendus animi iusto, recusandae cupiditate blanditiis molestiae praesentium quibusdam? Dolorum. */}
+                            <span>{entries.comments}</span>
                         </Typography>
-                        {expanded && <Edit />}
+                        
+                        <Tooltip title="Edit" placement="top">
+                            <IconButton onClick={onClick}>
+                                <Edit></Edit>
+                            </IconButton>
+                        </Tooltip>
+                        { editform ? <EditEntry /> : null }
+
                     </CardContent>
                 </Collapse>
                 <CardContent>
@@ -126,9 +156,7 @@ const EntryCard = ({entries} : {entries:any}) => {
                 </CardActions>  
             </Card>
         </div>
-
     );
-
 }
 
 export default EntryCard
