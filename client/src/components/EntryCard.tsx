@@ -56,7 +56,7 @@ const EntryCard = ({entries} : {entries:any}, {props} : {props:any}) => {
     const onClick = () => {setEditForm(!editform)};
 
     // Select category state
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState(entries.category);
     
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCategory((e.target as HTMLInputElement).value);
