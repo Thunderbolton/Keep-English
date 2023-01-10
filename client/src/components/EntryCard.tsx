@@ -1,4 +1,5 @@
-import { Avatar, Card, CardActions, CardContent, CardHeader, Collapse, MenuItem, Stack, TextField, Tooltip, Typography } from '@mui/material';
+import EditEntry from './EditEntry';
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Collapse, MenuItem, Stack, TextField, Tooltip, Typography } from '@mui/material';
 import { Edit, Delete, } from '@material-ui/icons';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
@@ -50,37 +51,10 @@ const EntryCard = ({entries} : {entries:any}, {props} : {props:any}) => {
         title: expanded ? "Collapse" : "Expand"
     };
 
-
     // To show edit contents
     const [editform, setEditForm] = useState(false);
     const onClick = () => {setEditForm(!editform)};
 
-    // Select category state
-    const [category, setCategory] = useState(entries.category);
-    
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCategory((e.target as HTMLInputElement).value);
-      };
-
-
-    const EditEntry = () => (
-        <form>
-            <Stack spacing={2}>
-                <TextField size="small" label="Title" margin="dense" />
-
-                <TextField size="small" label="Category" margin="dense" select value={category} onChange={handleChange}>
-                    <MenuItem value="Daily">Daily</MenuItem> 
-                    <MenuItem value="Business">Business</MenuItem> 
-                    <MenuItem value="Travel">Travel</MenuItem> 
-                    <MenuItem value="Exam">Exam</MenuItem> 
-                </TextField> 
-                
-                <TextField size="small" label="Comments" margin="dense" multiline minRows={3} />
-                    
-            </Stack>
-                
-        </form>
-      )
     
     const deleteEntry = async () => {
         const response = await axios.delete(`api/entries/${_id}`)
@@ -140,7 +114,7 @@ const EntryCard = ({entries} : {entries:any}, {props} : {props:any}) => {
                                 <Edit></Edit>
                             </IconButton>
                         </Tooltip>
-                        { editform ? <EditEntry /> : null }
+                        { editform ? <EditEntry entries={entries} /> : null }
 
                     </CardContent>
                 </Collapse>
