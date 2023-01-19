@@ -1,5 +1,5 @@
 import EditEntry from './EditEntry';
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Collapse, MenuItem, Stack, TextField, Tooltip, Typography } from '@mui/material';
+import { Avatar, Card, CardActions, CardContent, CardHeader, Collapse, Tooltip, Typography } from '@mui/material';
 import { Edit, Delete, } from '@material-ui/icons';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { useEntriesContext } from '../context/useEntriesContext';
 
 
-const EntryCard = ({entries} : {entries:any}, {props} : {props:any}) => {
+const EntryCard = ({entries} : {entries:any}) => {
 
     const { _id } = entries;
     const { dispatch } = useEntriesContext()
@@ -59,24 +59,11 @@ const EntryCard = ({entries} : {entries:any}, {props} : {props:any}) => {
     const deleteEntry = async () => {
         const response = await axios.delete(`api/entries/${_id}`)
   
-        if (response.data) {
-            // console.log(`Success: ${response.data}`)
+        if(response.data) {
             dispatch({type: 'delete_entry', payload: response.data})
             console.log(response.data)
         }
     };
-
-
-    // const updateEntry = async () => {
-    //     const response = await axios.put(`api/entries/${_id}`)
-
-    //     if (response.data) {
-    //         // console.log(`Success: ${response.data}`)
-        
-    //         dispatch({type: 'update_entry', payload: response.data._id})
-    //         console.log(response.data)
-    //     }
-    // }
 
     return (
         <div>

@@ -46,7 +46,7 @@ const EntryForm = () => {
       <Typography variant='h4'>Entry Form</Typography>
       <Box 
         sx={{my: 3}}>      
-        <form action="" className="entry-form" onSubmit={handleSubmit}>
+        <form action="" className="entry-form" autoComplete="off" onSubmit={handleSubmit}>
           <TextField 
             sx={{my: 3}}
             value={title}
