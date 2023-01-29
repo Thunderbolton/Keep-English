@@ -1,5 +1,5 @@
 import EditEntry from './EditEntry';
-import { Avatar, Card, CardActions, CardContent, CardHeader, Collapse, Tooltip, Typography } from '@mui/material';
+import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, Collapse, Tooltip, Typography } from '@mui/material';
 import { Edit, Delete, } from '@material-ui/icons';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
@@ -51,6 +51,12 @@ const EntryCard = ({entries} : {entries:any}) => {
         title: expanded ? "Collapse" : "Expand"
     };
 
+
+    const StyledCardActionArea = styled(CardActionArea)(() => 
+    `.MuiCardActionArea-focusHighlight {
+            background: transparent;
+        }`);
+
     // To show edit contents
     const [editform, setEditForm] = useState(false);
     const onClick = () => {setEditForm(!editform)};
@@ -67,55 +73,59 @@ const EntryCard = ({entries} : {entries:any}) => {
 
     return (
         <div>
-            <Card elevation={2} sx={{ maxWidth: 450, minHeight: 350 }}>
-                <CardHeader
-                avatar={
-                    entries.category && <Avatar sx={{ bgcolor: entries.category === 'Daily' ? green[400] : entries.category === 'Business' ? blue[400] : entries.category === 'Travel' ? orange[400] : entries.category === 'Exam' ? red[400] : grey[400]}}>
-                      {entries.category.charAt(0)}
-                    </Avatar>
-                  }
-                title={entries.title}
-                subheader={new Date(entries.createdAt).toLocaleString('en-GB', dateOptions)}
-                action={
-                    <ExpandMore
-                        expand={expanded}
-                        sx={{color: expandedColor ? "primary" : "blue"}}
-                        onClick={handleExpandClick}
-                        aria-expanded={expanded}
-                        aria-label="show more"
-                        >
-                        <Tooltip {...expandButtonProps} placement="top">
-                            <ExpandMoreIcon/>
-                        </Tooltip> 
-                    </ExpandMore>     
-                }
-                />
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <StyledCardActionArea disableRipple
+             > 
+                <Card elevation={2} sx={{ maxWidth: 450, minHeight: 350, borderRadius: 4, '&:hover': {transform: expanded ? 'scale(1)' : 'scale(1.1)' }, transition: '0.2s' }}>
+    
+                    <CardHeader
+                    avatar={
+                        entries.category && <Avatar sx={{ bgcolor: entries.category === 'Daily' ? green[400] : entries.category === 'Business' ? blue[400] : entries.category === 'Travel' ? orange[400] : entries.category === 'Exam' ? red[400] : grey[400]}}>
+                        {entries.category.charAt(0)}
+                        </Avatar>
+                    }
+                    title={entries.title}
+                    subheader={new Date(entries.createdAt).toLocaleString('en-GB', dateOptions)}
+                    action={
+                        <ExpandMore
+                            expand={expanded}
+                            sx={{color: expandedColor ? "primary" : "blue", }}
+                            onClick={handleExpandClick}
+                            aria-expanded={expanded}
+                            aria-label="show more"
+                            >
+                            <Tooltip {...expandButtonProps} placement="top">
+                                <ExpandMoreIcon/>
+                            </Tooltip> 
+                        </ExpandMore>     
+                    }
+                    />
+                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                        <CardContent>
+                            <Typography paragraph>
+                                <span>{entries.comments}</span>
+                            </Typography>
+                            
+                            <Tooltip title="Edit" placement="top">
+                                <IconButton onClick={onClick}>
+                                    <Edit></Edit>
+                                </IconButton>
+                            </Tooltip>
+                            { editform ? <EditEntry entries={entries} /> : null }
+
+                        </CardContent>
+                    </Collapse>
                     <CardContent>
-                        <Typography paragraph>
-                            <span>{entries.comments}</span>
-                        </Typography>
-                        
-                        <Tooltip title="Edit" placement="top">
-                            <IconButton onClick={onClick}>
-                                <Edit></Edit>
+                        <li>{entries._id}</li>
+                    </CardContent>
+                    <CardActions>
+                        <Tooltip title="Delete">
+                            <IconButton onClick={deleteEntry}>
+                                <Delete />
                             </IconButton>
                         </Tooltip>
-                        { editform ? <EditEntry entries={entries} /> : null }
-
-                    </CardContent>
-                </Collapse>
-                <CardContent>
-                    <li>{entries._id}</li>
-                </CardContent>
-                <CardActions>
-                    <Tooltip title="Delete">
-                        <IconButton onClick={deleteEntry}>
-                            <Delete />
-                        </IconButton>
-                    </Tooltip>
-                </CardActions>  
-            </Card>
+                    </CardActions>  
+                </Card>
+                </StyledCardActionArea>
         </div>
     );
 }
