@@ -57,6 +57,23 @@ const EntryCard = ({entries} : {entries:any}) => {
             background: transparent;
         }`);
 
+
+    const selectCategoryColor = () => {
+            switch(entries.category) {
+                case 'Daily':
+                  return green[400];
+                case 'Business':
+                  return blue[400]; 
+                case 'Travel':
+                  return orange[400];
+                case 'Exam':
+                  return red[400]; 
+                default:
+                  return grey[400];
+              }
+          }
+              
+
     // To show edit contents
     const [editform, setEditForm] = useState(false);
     const onClick = () => {setEditForm(!editform)};
@@ -75,11 +92,11 @@ const EntryCard = ({entries} : {entries:any}) => {
         <div>
             <StyledCardActionArea disableRipple
              > 
-                <Card elevation={2} sx={{ maxWidth: 450, minHeight: 350, borderRadius: 4, '&:hover': {transform: expanded ? 'scale(1)' : 'scale(1.1)' }, transition: '0.2s' }}>
+                <Card elevation={2} sx={{ maxWidth: 450, minHeight: 350, border: 1, borderColor: '#BFC9CA', borderRadius: 4, '&:hover': {transform: expanded ? 'scale(1)' : 'scale(1.1)', border: 1, borderColor: selectCategoryColor(), borderRadius: 4,  overflow: 'hidden' }, transition: '0.2s' }}>
     
                     <CardHeader
                     avatar={
-                        entries.category && <Avatar sx={{ bgcolor: entries.category === 'Daily' ? green[400] : entries.category === 'Business' ? blue[400] : entries.category === 'Travel' ? orange[400] : entries.category === 'Exam' ? red[400] : grey[400]}}>
+                        entries.category && <Avatar sx={{ bgcolor: selectCategoryColor()}}>
                         {entries.category.charAt(0)}
                         </Avatar>
                     }
