@@ -90,8 +90,7 @@ const EntryCard = ({entries} : {entries:any}) => {
 
     return (
         <div>
-            <StyledCardActionArea disableRipple
-             > 
+            <StyledCardActionArea disableRipple> 
                 <Card elevation={2} sx={{ maxWidth: 450, minHeight: 350, border: 1, borderColor: '#BFC9CA', borderRadius: 4, '&:hover': {transform: expanded ? 'scale(1)' : 'scale(1.1)', border: 1, borderColor: selectCategoryColor(), borderRadius: 4,  overflow: 'hidden' }, transition: '0.2s' }}>
     
                     <CardHeader
@@ -142,7 +141,7 @@ const EntryCard = ({entries} : {entries:any}) => {
                         </Tooltip>
                     </CardActions>  
                 </Card>
-                </StyledCardActionArea>
+            </StyledCardActionArea>
         </div>
     );
 }

@@ -15,4 +15,6 @@ app.use(cors())
 
 app.use('/api/entries', require('../routes/entryRoutes.js'))
 
+app.use('/api/user', require('../routes/userRoutes.js'))
+
 app.listen(port, () => console.log(`server running on ${port}`));
