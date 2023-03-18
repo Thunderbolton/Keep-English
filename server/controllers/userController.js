@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const validator = require('validator')
 const User = require('../models/userModel')
 
 const signinUser = async (req, res) => {
@@ -10,6 +11,14 @@ const registerUser = async (req, res) => {
 
     if(!name || !email || !password) {
         res.status(400).json({ mssg: 'Please enter all information' })
+    }
+
+    if(!validator.isEmail(email)) {
+        res.status(400).json({mssg: 'Please enter a valid email'})
+    }
+
+    if(!validator.isStrongPassword(password)) {
+        res.status(400).json({mssg: 'Please enter a stronger password of at least 8 characters including 1 lowercase character, 1 uppercase character, 1 number, and 1 symbol'})
     }
 
     const userExists = await User.findOne({ email })
