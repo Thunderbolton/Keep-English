@@ -1,9 +1,23 @@
 const bcrypt = require('bcrypt')
 const validator = require('validator')
+const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
 
 const signinUser = async (req, res) => {
-    res.json({mssg: 'sign in user'})
+    const { email, password } = req.body
+
+    if(!email || !password) {
+        res.status(400).json({ mssg: 'Please enter all information' })
+    }
+
+    const existingUser = await User.findOne({ email })
+
+    if(existingUser && (await bcrypt.compare(password, existingUser.password))) {
+        res.json({ name: existingUser.name, email: existingUser.email, mssg: 'Success. User signed in', token: generateJWT(existingUser._id)})
+    } else {
+        res.status(400)
+        throw Error('Invalid information')
+    }
 }
 
 const registerUser = async (req, res) => {
@@ -34,12 +48,18 @@ const registerUser = async (req, res) => {
     const newUser = await User.create({name, email, password: hashedPassword})
 
     if(newUser) {
-        res.status(201).json({name: newUser.name, email: newUser.email})
+        res.status(201).json({name: newUser.name, email: newUser.email, token: generateJWT(newUser._id)})
     } else {
         res.status(400)
         throw Error('Could not create user')
     }
 }
 
+
+const generateJWT = (_id) => {
+    return jwt.sign({_id}, process.env.JWT_SECRET, {
+        expiresIn: '10d'
+    })
+}
 
 module.exports = { signinUser, registerUser }
