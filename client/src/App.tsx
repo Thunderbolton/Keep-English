@@ -1,10 +1,9 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-
-import EntriesCollection from './components/EntriesCollection';
-import EntryForm from './components/EntryForm';
+import { CssBaseline } from '@mui/material';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import { useEntriesContext } from './context/useEntriesContext';
+import Home from './components/Home';
+import Register from './components/Register';
+import SignIn from './components/SignIn';
 
 // interface Entry {
 //   // comments: string
@@ -17,26 +16,26 @@ import { useEntriesContext } from './context/useEntriesContext';
 
 const App = () => {
 
-  // const [entries, setEntries] = useState<Entry[]>([])
-
-  const { entries, dispatch } = useEntriesContext()
-
-  useEffect(() => {
-    const fetchEntries = async () => {
-    const response = await axios.get(`http://localhost:5000/api/entries`)
-    
-    if(response) {
-       dispatch({type: 'set_entries', payload: response.data})
-    }
-  }
-    fetchEntries()
-  },[])
-
   return (
     <div className="App">
-      <Header />
-      <EntryForm />
-      <EntriesCollection entries={entries} />
+      <BrowserRouter>
+      <CssBaseline />
+        <Header />
+        <Routes>
+          <Route
+            path='/'
+            element={<Home />}
+          />
+          <Route
+            path='/register'
+            element={<Register />}
+          />
+          <Route
+            path='/signin'
+            element={<SignIn />}
+          />
+        </Routes>
+      </BrowserRouter> 
     </div>
   );
 }
