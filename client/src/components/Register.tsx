@@ -1,16 +1,19 @@
-import { Button, Container, Grid, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
 
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirm, setConfirm] = useState('')
 
     const onSubmit = async (e: any) => {
         e.preventDefault()
-        console.log(email, password)
+        console.log('User successfully registered.')
     }
+
 
     return ( 
         <>
@@ -27,6 +30,8 @@ const Register = () => {
                         name="name"
                         label="Name"
                         id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -62,12 +67,12 @@ const Register = () => {
                         name="confirm-password"
                         label="Confirm Password"
                         id="confirm-password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={confirm}
+                        onChange={(e) => setConfirm(e.target.value)}
                         />
                     </Grid>
                     <Grid item xs={12}>
-                    <Button variant="contained" sx={{marginTop: '15px'}}>Register</Button>
+                    <Button variant="contained" type="submit" sx={{marginTop: '15px'}}>Register</Button>
                     </Grid>
                 </Grid>
             </form>
