@@ -1,12 +1,13 @@
 import { Button, MenuItem, Stack, TextField } from '@mui/material';
-import { useState } from 'react';
-import { useEntriesContext } from '../context/useEntriesContext';
+import { useContext, useState } from 'react';
 import axios from 'axios';
+import { EntriesContext } from '../context/EntryContext';
 
 const EditEntry = ({entries} : {entries:any}) => {
 
     const { _id } = entries;
-    const { dispatch } = useEntriesContext()
+    const { dispatch } = useContext(EntriesContext)
+
     
     // Edit form input states
     const [title, setTitle] = useState(entries.title);

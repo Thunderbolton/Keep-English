@@ -6,14 +6,14 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import { blue, green, grey, orange, red } from '@mui/material/colors';
 import axios from 'axios';
-import { useState } from 'react';
-import { useEntriesContext } from '../context/useEntriesContext';
+import { useContext, useState } from 'react'
+import { EntriesContext } from '../context/EntryContext';
 
 
 const EntryCard = ({entries} : {entries:any}) => {
 
     const { _id } = entries;
-    const { dispatch } = useEntriesContext()
+    const { dispatch } = useContext(EntriesContext)
       
     const dateOptions: Intl.DateTimeFormatOptions = {
         weekday: 'long',

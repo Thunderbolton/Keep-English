@@ -16,7 +16,6 @@ export const entriesReducer = (state, action) => {
           default:
             return state;
         }
-      
 }
 
 export const EntriesContextProvider = ({ children }) => {

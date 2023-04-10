@@ -1,14 +1,14 @@
 import { Typography, Button, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import { Box } from '@mui/system';
 import axios from 'axios';
-import { useState } from 'react';
-import { useEntriesContext } from '../context/useEntriesContext';
+import { useContext, useState } from 'react';
+import { EntriesContext } from '../context/EntryContext';
 
 
 const EntryForm = () => {
 
 
-  const { dispatch } = useEntriesContext()
+  const { dispatch } = useContext(EntriesContext)
 
   // Entry Form state
   const [category, setCategory] = useState('Daily');
