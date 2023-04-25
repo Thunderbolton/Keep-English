@@ -15,7 +15,7 @@ export const authReducer = (state, action) => {
 
 export const AuthContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, {
-        user: []
+        user: null
     })
 
     console.log('Auth context state: ', state)

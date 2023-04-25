@@ -1,19 +1,58 @@
 import { Button, Grid, TextField } from "@mui/material";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
+
 
 const Register = () => {
 
+    // Register fields state
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [confirm, setConfirm] = useState('')
 
-    const onSubmit = async (e: any) => {
+    // Register user state
+    const [isLoading, setIsLoading] = useState<any | null>(null)
+    const [error, setError] = useState<any | null>(null)
+    const { dispatch } = useContext(AuthContext)
+    
+
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log('User successfully registered.')
+        await register(name, email, password)
     }
 
+
+    const register = async (name: string, email: string, password: string) => {
+        setIsLoading(true)
+        setError(null)
+
+        const userData = { name, email, password };
+
+        try {
+            const response = await axios.post('/api/user/register', userData);
+        
+            if(response.status === 201) {
+                console.log(response.data)
+                localStorage.setItem('user', JSON.stringify(response.data))
+                dispatch({type: 'LOGIN', payload: response.data})
+                setIsLoading(false)
+                
+            } else {
+                setIsLoading(false);
+                if (error && error.response) {
+                    setError(error.response.data.message);
+                } else {
+                    setError("There was an error");
+                }    
+            }} 
+        catch (error) {
+            setIsLoading(false)
+            setError(error || "There was an error.")
+            console.log("Error", error);
+          }
+        }
 
     return ( 
         <>
@@ -60,7 +99,7 @@ const Register = () => {
                         />
                     </Grid>
                     <Grid item xs={6}>
-                    <TextField
+                    {/* <TextField
                         required
                         fullWidth
                         autoComplete="off"
@@ -69,15 +108,16 @@ const Register = () => {
                         id="confirm-password"
                         value={confirm}
                         onChange={(e) => setConfirm(e.target.value)}
-                        />
+                        /> */}
                     </Grid>
                     <Grid item xs={12}>
                     <Button variant="contained" type="submit" sx={{marginTop: '15px'}}>Register</Button>
+                    {/* {error && <h4>{error}</h4>} */}
                     </Grid>
                 </Grid>
             </form>
         </>
      );
-}
+    }
  
 export default Register;
