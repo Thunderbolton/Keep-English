@@ -28,32 +28,35 @@ const Register = () => {
         setIsLoading(true)
         setError(null)
 
-        const userData = { name, email, password };
+        const userData = { name, email, password }
 
-        try {
-            const response = await axios.post('/api/user/register', userData);
-        
-            if(response.status === 201) {
-                console.log(response.data)
-                localStorage.setItem('user', JSON.stringify(response.data))
-                dispatch({type: 'LOGIN', payload: response.data})
-                setIsLoading(false)
-                
-            } else {
-                setIsLoading(false);
-                if (error && error.response) {
-                    setError(error.response.data.message);
+            try {
+                const response = await axios.post('/api/user/register', userData);
+
+                if (response.data) {
+                    console.log(response.data);
+                    localStorage.setItem('user', JSON.stringify(response.data))
+                    dispatch({type: 'LOGIN', payload: response.data})
+                    setIsLoading(false)
+
                 } else {
-                    setError("There was an error");
-                }    
+                    setError('Registration failed')
+                    setIsLoading(false)
             }} 
-        catch (error) {
-            setIsLoading(false)
-            setError(error || "There was an error.")
-            console.log("Error", error);
-          }
-        }
-
+            
+            catch (error: any) {
+                if (error.response && error.response.data && error.response.data.mssg) {
+                    setError(`Registration failed: ${error.response.data.mssg}`)
+                    setIsLoading(false)
+                  } else {
+                    setError('Registration failed')
+                    setIsLoading(false)
+                  } 
+        
+        } 
+    }
+        
+        
     return ( 
         <>
             <h2 style={{marginTop: '100px'}}>Create a new account</h2>
@@ -111,8 +114,8 @@ const Register = () => {
                         /> */}
                     </Grid>
                     <Grid item xs={12}>
-                    <Button variant="contained" type="submit" sx={{marginTop: '15px'}}>Register</Button>
-                    {/* {error && <h4>{error}</h4>} */}
+                    <Button disabled={isLoading} variant="contained" type="submit" sx={{marginTop: '15px'}}>Register</Button>
+                    {error && <h4>{error}</h4>}
                     </Grid>
                 </Grid>
             </form>
