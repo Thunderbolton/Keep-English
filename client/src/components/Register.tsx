@@ -1,4 +1,5 @@
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, InputAdornment, TextField, InputProps, IconButton } from "@mui/material";
+import {Visibility, VisibilityOff} from '@mui/icons-material';
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -11,13 +12,19 @@ const Register = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [togglePassword, setHandleTogglePassword] = useState(false)
+
 
     // Register user state
+    const { dispatch } = useContext(AuthContext)
     const [isLoading, setIsLoading] = useState<any | null>(null)
     const [error, setError] = useState<any | null>(null)
-    const { dispatch } = useContext(AuthContext)
     
+    
+    // Show/hide password 
+    const handleTogglePassword = () => setHandleTogglePassword((show) => !show);
 
+    // Form submission
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         await register(name, email, password)
@@ -51,8 +58,7 @@ const Register = () => {
                   } else {
                     setError('Registration failed')
                     setIsLoading(false)
-                  } 
-        
+                  }
         } 
     }
         
@@ -96,22 +102,20 @@ const Register = () => {
                         autoComplete="off"
                         name="password"
                         label="Password"
+                        type={togglePassword ? 'text' : 'password'}
                         id="password"
+                        InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <IconButton onClick={handleTogglePassword} >
+                                  {togglePassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                              </InputAdornment>
+                            )
+                          }}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         />
-                    </Grid>
-                    <Grid item xs={6}>
-                    {/* <TextField
-                        required
-                        fullWidth
-                        autoComplete="off"
-                        name="confirm-password"
-                        label="Confirm Password"
-                        id="confirm-password"
-                        value={confirm}
-                        onChange={(e) => setConfirm(e.target.value)}
-                        /> */}
                     </Grid>
                     <Grid item xs={12}>
                     <Button disabled={isLoading} variant="contained" type="submit" sx={{marginTop: '15px'}}>Register</Button>
