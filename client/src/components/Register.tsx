@@ -1,5 +1,6 @@
 import { Button, Grid, InputAdornment, TextField, InputProps, IconButton } from "@mui/material";
 import {Visibility, VisibilityOff} from '@mui/icons-material';
+import { Box } from "@mui/system";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -24,11 +25,18 @@ const Register = () => {
     // Show/hide password 
     const handleTogglePassword = () => setHandleTogglePassword((show) => !show);
 
+    const textFieldProps = {
+        required: true,
+        fullWidth: true,
+        autoComplete: "off",
+        sx: {mb: 2}
+      };
+
     // Form submission
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         await register(name, email, password)
-    }
+    };
 
 
     const register = async (name: string, email: string, password: string) => {
@@ -60,46 +68,39 @@ const Register = () => {
                     setIsLoading(false)
                   }
         } 
-    }
-        
+    };
         
     return ( 
         <>
             <h2 style={{marginTop: '100px'}}>Create a new account</h2>
             <p>Already Registered? Sign in <Link to='/signin'>here</Link></p>
             <form onSubmit={onSubmit}>
-                <Grid container spacing={1} sx={{ maxWidth: '400px', margin: 'auto'}}>
-                    <Grid item xs={6}>
+            <Box 
+                sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                maxWidth: '350px',
+                margin: '20px auto'
+                }}>
                     <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        autoComplete="off"
+                        {...textFieldProps}
                         name="name"
                         label="Name"
                         id="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         />
-                    </Grid>
-                    <Grid item xs={6}>
                     <TextField
-                        margin="normal"
-                        fullWidth
-                        required
-                        autoComplete="off"
+                        {...textFieldProps}
                         name="email"
                         label="Email"
                         id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         />
-                    </Grid>
-                    <Grid item xs={6}>
                     <TextField
-                        required
-                        fullWidth
-                        autoComplete="off"
+                        {...textFieldProps}
                         name="password"
                         label="Password"
                         type={togglePassword ? 'text' : 'password'}
@@ -116,12 +117,10 @@ const Register = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         />
-                    </Grid>
-                    <Grid item xs={12}>
+                    
                     <Button disabled={isLoading} variant="contained" type="submit" sx={{marginTop: '15px'}}>Register</Button>
                     {error && <h4>{error}</h4>}
-                    </Grid>
-                </Grid>
+                </Box>    
             </form>
         </>
      );

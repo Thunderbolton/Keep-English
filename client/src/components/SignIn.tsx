@@ -8,6 +8,13 @@ const SignIn = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const textFieldProps = {
+        required: true,
+        fullWidth: true,
+        autoComplete: "off",
+        sx: {mb: 2}
+      };
+
     const onSubmit = async (e: any) => {
         e.preventDefault()
         console.log('submitted. User signed in')
@@ -22,14 +29,11 @@ const SignIn = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                maxWidth: '300px',
+                maxWidth: '350px',
                 margin: '20px auto'
                 }}>
                     <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    autoComplete="off"
+                    {...textFieldProps}
                     id="email"
                     label="Email"
                     name="email"
@@ -37,10 +41,7 @@ const SignIn = () => {
                     onChange={(e) => setEmail(e.target.value)}             
                     />
                     <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    autoComplete="off"
+                    {...textFieldProps}
                     name="password"
                     label="Password"
                     type="password"

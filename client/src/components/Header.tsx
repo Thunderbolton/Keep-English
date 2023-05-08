@@ -1,4 +1,5 @@
 import { Button, Container } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,6 +13,9 @@ const Header = () => {
       <Box>
         <AppBar color='transparent' position='static'>
           <Toolbar>
+            <Link to="/">
+              <HomeIcon sx={{color: 'green'}} />
+            </Link>
             <Typography variant="h3" sx={{ paddingLeft: '12%', marginLeft: 'auto', fontSize: 'clamp(1rem, 1.7rem, 2rem)' }}><Link to='/' style={{ color: 'inherit', textDecoration: 'inherit'}}>Keep English</Link>
             </Typography>
             <ul style={{marginLeft: 'auto', display: 'flex', flexWrap: 'nowrap'}}>
