@@ -51,7 +51,7 @@ const Register = () => {
                 if (response.data) {
                     console.log(response.data);
                     localStorage.setItem('user', JSON.stringify(response.data))
-                    dispatch({type: 'LOGIN', payload: response.data})
+                    dispatch({type: 'SIGNIN', payload: response.data})
                     setIsLoading(false)
 
                 } else {

@@ -15,7 +15,7 @@ const SignIn = () => {
         sx: {mb: 2}
       };
 
-    const onSubmit = async (e: any) => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         console.log('submitted. User signed in')
     }
