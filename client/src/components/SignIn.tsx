@@ -1,12 +1,26 @@
-import { Button, TextField } from "@mui/material";
+import axios from "axios";
+import { Button, InputAdornment, TextField, IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Box } from "@mui/system";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+
+
 
 const SignIn = () => {
 
+    // Sign in fields state
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [togglePassword, setHandleTogglePassword] = useState(false)
+
+    // Sign in user state
+    const { dispatch } = useContext(AuthContext)
+    const [isLoading, setIsLoading] = useState<any | null>(null)
+    const [error, setError] = useState<any | null>(null)
+
+    const handleTogglePassword = () => setHandleTogglePassword((show) => !show);
 
     const textFieldProps = {
         required: true,
@@ -17,8 +31,38 @@ const SignIn = () => {
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log('submitted. User signed in')
+        await signin(email, password)
     }
+
+    const signin = async (email: string, password: string) => {
+        setIsLoading(true)
+        setError(null)
+
+        const userData = { email, password }
+
+            try {
+                const response = await axios.post('/api/user/signin', userData);
+
+                if (response.data) {
+                    localStorage.setItem('user', JSON.stringify(response.data))
+                    dispatch({type: 'SIGNIN', payload: response.data})
+                    setIsLoading(false)
+
+                } else {
+                    setError('Sign in failed')
+                    setIsLoading(false)
+            }} 
+            
+            catch (error: any) {
+                if (error.response && error.response.data && error.response.data.mssg) {
+                    setError(`Could not sign in: ${error.response.data.mssg}`)
+                    setIsLoading(false)
+                  } else {
+                    setError('Sign in failed')
+                    setIsLoading(false)
+                  }
+        } 
+    };
 
     return ( 
         <>
@@ -44,8 +88,17 @@ const SignIn = () => {
                     {...textFieldProps}
                     name="password"
                     label="Password"
-                    type="password"
+                    type={togglePassword ? 'text' : 'password'}
                     id="password"
+                    InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={handleTogglePassword} >
+                              {togglePassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                          </InputAdornment>
+                        )
+                      }}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     />
@@ -54,9 +107,11 @@ const SignIn = () => {
                     type="submit"
                     variant="contained"
                     color="primary"
+                    disabled={isLoading}
                     >
                     Sign In
                     </Button>
+                    {error && <h4>{error}</h4>}
                 </Box>
             <p>Not registered? Sign up <Link to='/register'>here</Link></p>
             </form>

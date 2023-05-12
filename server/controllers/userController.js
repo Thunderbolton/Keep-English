@@ -15,7 +15,7 @@ const signinUser = async (req, res) => {
     if(existingUser && (await bcrypt.compare(password, existingUser.password))) {
         return res.json({ name: existingUser.name, email: existingUser.email, mssg: 'Success. User signed in', token: generateJWT(existingUser._id)})
     } else {
-       return res.status(400).json({mssg: 'Invalid information'})
+       return res.status(400).json({mssg: 'Email or password is incorrect. Please check and try again'})
     }
 }
 
