@@ -1,6 +1,10 @@
 const express = require('express')
-const router =  express.Router()
 const { getEntries, createEntry, updateEntry, deleteEntry } = require('../controllers/entriesController')
+const requireAuth = require('../middleware/requireAuth')
+
+const router =  express.Router()
+
+router.use(requireAuth)
 
 router.get('/', getEntries)
 

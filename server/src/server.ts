@@ -1,4 +1,4 @@
-import express, { Application, Request, Response, urlencoded } from 'express';
+import express, { Application } from 'express';
 const dotenv = require('dotenv').config()
 const cors = require('cors')
 const connectDB = require('../config/db.js')
