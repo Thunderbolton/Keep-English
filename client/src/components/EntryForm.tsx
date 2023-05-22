@@ -1,20 +1,23 @@
-import { Typography, Button, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import { Button, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import { Box } from '@mui/system';
 import axios from 'axios';
 import { useContext, useState } from 'react';
 import { EntriesContext } from '../context/EntryContext';
+import { AuthContext } from "../context/AuthContext";
 
 
 const EntryForm = () => {
 
-
   const { dispatch } = useContext(EntriesContext)
+  const { user } = useContext(AuthContext)
 
   // Entry Form state
   const [category, setCategory] = useState('Daily');
   const [title, setTitle] = useState('');
   const [comments, setComments] = useState('');
 
+  const [buttonText, setButtonText] = useState('Add Entry')
+  const [buttonColor, setButtonColor] = useState<'error' | 'primary'>('primary');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCategory((e.target as HTMLInputElement).value);
@@ -24,10 +27,21 @@ const EntryForm = () => {
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    if(!user) {
+      setButtonText('Sign in to add entry')
+      setButtonColor('error')
+      return
+    }
+
     try {
-      const response = await axios.post('/api/entries', {title: title, comments: comments, category: category});
-      // console.log(response.data)
-      // console.log(response)
+      const response = await axios.post('/api/entries', 
+        { title: title, comments: comments, category: category },
+        {
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }
+        }
+    );
       if (response.data) {
         dispatch({type: 'create_entry', payload: response.data})
       }
@@ -83,7 +97,7 @@ const EntryForm = () => {
             required
           />
 
-        <Button variant='contained' type='submit'>Add Entry</Button>
+        <Button variant='contained' color={buttonColor} type='submit'>{buttonText}</Button>
         </form> 
       </Box>
     </div>

@@ -8,12 +8,14 @@ import { blue, green, grey, orange, red } from '@mui/material/colors';
 import axios from 'axios';
 import { useContext, useState } from 'react'
 import { EntriesContext } from '../context/EntryContext';
+import { AuthContext } from "../context/AuthContext";
 
 
 const EntryCard = ({entries} : {entries:any}) => {
 
     const { _id } = entries;
     const { dispatch } = useContext(EntriesContext)
+    const { user } = useContext(AuthContext)
       
     const dateOptions: Intl.DateTimeFormatOptions = {
         weekday: 'long',
@@ -80,7 +82,11 @@ const EntryCard = ({entries} : {entries:any}) => {
 
     
     const deleteEntry = async () => {
-        const response = await axios.delete(`api/entries/${_id}`)
+        const response = await axios.delete(`api/entries/${_id}`, {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          });
   
         if(response.data) {
             dispatch({type: 'delete_entry', payload: response.data})

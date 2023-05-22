@@ -2,11 +2,13 @@ import { Button, MenuItem, Stack, TextField } from '@mui/material';
 import { useContext, useState } from 'react';
 import axios from 'axios';
 import { EntriesContext } from '../context/EntryContext';
+import { AuthContext } from "../context/AuthContext";
 
 const EditEntry = ({entries} : {entries:any}) => {
 
     const { _id } = entries;
     const { dispatch } = useContext(EntriesContext)
+    const { user } = useContext(AuthContext)
 
     
     // Edit form input states
@@ -18,7 +20,11 @@ const EditEntry = ({entries} : {entries:any}) => {
     const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const response = await axios.put(`api/entries/${_id}`, {title: title, category: category, comments: comments})
+        const response = await axios.put(`api/entries/${_id}`, {title: title, category: category, comments: comments}, {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }
+          })
 
         if (response.data) {
           dispatch({type: 'update_entry', payload: response.data})
