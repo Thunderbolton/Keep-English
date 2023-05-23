@@ -1,20 +1,16 @@
 import { CssBaseline } from '@mui/material';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './components/Home';
 import Register from './components/Register';
 import SignIn from './components/SignIn';
+import { AuthContext } from "./context/AuthContext";
+import { useContext } from 'react';
 
-// interface Entry {
-//   // comments: string
-//   createdAt: number
-//   title: string
-//   text: string
-//   updatedAt: number
-//   _id: number
-// }
 
 const App = () => {
+
+const { user } = useContext(AuthContext)
 
   return (
     <div className="App">
@@ -24,15 +20,15 @@ const App = () => {
         <Routes>
           <Route
             path='/'
-            element={<Home />}
+            element={user ? <Home /> : <Navigate to='/signin'/>}
           />
           <Route
             path='/register'
-            element={<Register />}
+            element={!user ? <Register /> : <Navigate to='/'/>}
           />
           <Route
             path='/signin'
-            element={<SignIn />}
+            element={!user ? <SignIn /> : <Navigate to='/'/>}
           />
         </Routes>
       </BrowserRouter> 
