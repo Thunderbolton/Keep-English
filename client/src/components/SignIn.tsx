@@ -2,7 +2,7 @@ import axios from "axios";
 import { Button, InputAdornment, TextField, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Box } from "@mui/system";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
@@ -28,6 +28,11 @@ const SignIn = () => {
         autoComplete: "off",
         sx: {mb: 2}
       };
+
+      useEffect(() => {
+        return () => {
+        };
+      }, []);  
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()

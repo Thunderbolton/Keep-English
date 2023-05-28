@@ -2,7 +2,7 @@ const express = require('express')
 const { getEntries, createEntry, updateEntry, deleteEntry } = require('../controllers/entriesController')
 const requireAuth = require('../middleware/requireAuth')
 
-const router =  express.Router()
+const router = express.Router()
 
 router.use(requireAuth)
 

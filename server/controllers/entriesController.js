@@ -2,16 +2,20 @@ const Entry = require('../models/entryModel')
 
 // GET - /api/entries
 const getEntries = async (req, res) => {
-    const entries = await Entry.find().sort({'updatedAt': -1})
+    const user_id = req.user._id
+
+    const entries = await Entry.find({ user_id }).sort({'updatedAt': -1})
     res.status(200).json(entries)
 }
 
 // POST - /api/entries
 const createEntry = async (req, res) => {
-    const {title, comments, category} = req.body
+
+    const { title, comments, category } = req.body
     
     try {
-        const entry = await Entry.create({title, comments, category})
+        const user_id = req.user._id
+        const entry = await Entry.create({title, comments, category, user_id})
         res.status(200).json(entry)
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -26,7 +30,7 @@ const updateEntry = async (req, res) => {
         res.status(400).json({ message: 'Could not find entry.' })
     }
 
-    const updatedEntry = await Entry.findByIdAndUpdate(req.params.id, req.body, {new: true,})
+    const updatedEntry = await Entry.findByIdAndUpdate(req.params.id, req.body, {new: true})
 
     res.status(200).json(updatedEntry)
 }
