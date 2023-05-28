@@ -57,7 +57,6 @@ const EntryForm = () => {
 
   return (
     <div>
-      {/* <Typography variant='h4'>Entry Form</Typography> */}
       <Box 
         sx={{my: 3}}>      
         <form action="" className="entry-form" autoComplete="off" onSubmit={handleSubmit}>

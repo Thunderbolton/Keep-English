@@ -9,3 +9,8 @@
   width: 50%;
   margin: 0 auto;
 }
+
+.entries-collection-container {
+  margin-top: 30px;
+  margin-bottom: 50px;
+}

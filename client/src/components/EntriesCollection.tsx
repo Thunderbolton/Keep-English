@@ -1,17 +1,19 @@
 import EntryCard from './EntryCard';
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import { useContext } from 'react';
-import { AuthContext } from "../context/AuthContext";
+import { EntriesContext } from "../context/EntryContext";
 
-const EntriesCollection = ({entries} : {entries:any}) => {
+const EntriesCollection = ({ entries } : { entries: any[] }) => {
 
-    const { user } = useContext(AuthContext)
+    const { entries: userEntries } = useContext(EntriesContext)
 
     return (
-      <div>
-          {user ? <h1>Entries collection</h1> : <h2>Please sign in to see your entries</h2>}
+      <>
+          {userEntries.length === 0 ? (
+            <Typography variant='h5'>Create your first entry now!</Typography>
+          ) : <Typography variant='h5'>Entries Collection</Typography>}
           
-          <Container>
+          <Container className='entries-collection-container'>
             <Grid container justifyContent="space-evenly" alignItems="center" gap={4}>
               {entries.map((entry:any) => (
                 <Grid item key={entry._id}>
@@ -21,8 +23,7 @@ const EntriesCollection = ({entries} : {entries:any}) => {
             </Grid>  
           </Container>
           
-          
-      </div>
+      </>
     );
   }
   
