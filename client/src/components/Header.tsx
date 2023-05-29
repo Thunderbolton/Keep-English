@@ -7,7 +7,7 @@ import Box from '@mui/material/Box/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { AuthContext } from "../context/AuthContext";
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 
 
@@ -21,6 +21,18 @@ const Header = () => {
   }
 
   const { user } = useContext(AuthContext)
+
+  const [welcome, setWelcome] = useState('')
+
+  useEffect(() => {
+    if (user)
+    setWelcome(`Welcome back, ${user.name}`)
+    const welcomeTimer = setTimeout(() => {
+        setWelcome(`${user.name}`);
+    }, 3000);
+
+    return () => clearTimeout(welcomeTimer);
+  }, [user]);
 
   return (
     <>
@@ -36,7 +48,7 @@ const Header = () => {
             <ul style={{marginLeft: 'auto', display: 'flex', flexWrap: 'nowrap'}}>
             {user && (
             <>  
-              <p>{user.email}</p>
+              <p>{welcome}</p>
               <Button 
                 sx={{marginLeft: '0.7rem', fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)'}}  
                 variant="outlined" 

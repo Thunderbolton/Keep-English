@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { useContext, useState } from 'react'
 import EditEntry from './EditEntry';
 import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, Collapse, Tooltip, Typography } from '@mui/material';
 import { Edit, Delete, } from '@material-ui/icons';
@@ -5,13 +7,11 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import { blue, green, grey, orange, red } from '@mui/material/colors';
-import axios from 'axios';
-import { useContext, useState } from 'react'
 import { EntriesContext } from '../context/EntryContext';
 import { AuthContext } from "../context/AuthContext";
 
 
-const EntryCard = ({entries} : {entries:any}) => {
+const EntryCard = ({ entries } : { entries: any }) => {
 
     const { _id } = entries;
     const { dispatch } = useContext(EntriesContext)
@@ -74,7 +74,6 @@ const EntryCard = ({entries} : {entries:any}) => {
                   return grey[400];
               }
           }
-              
 
     // To show edit contents
     const [editform, setEditForm] = useState(false);

@@ -9,5 +9,5 @@ export const SignOut = () => {
         dispatch({ type: 'SIGNOUT' })
 
     }
-    return {signout}
+    return { signout }
 }
