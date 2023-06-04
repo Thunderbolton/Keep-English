@@ -24,6 +24,8 @@ export const EntriesContextProvider = ({ children }) => {
         entries: []
     })
 
+    console.log('Entries context state:', state)
+
     return ( 
         <EntriesContext.Provider value={{...state, dispatch}}>
             { children }

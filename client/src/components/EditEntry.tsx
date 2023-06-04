@@ -4,7 +4,7 @@ import axios from 'axios';
 import { EntriesContext } from '../context/EntryContext';
 import { AuthContext } from "../context/AuthContext";
 
-const EditEntry = ({entries} : {entries:any}) => {
+const EditEntry = ({ entries } : { entries: any }) => {
 
     const { _id } = entries;
     const { dispatch } = useContext(EntriesContext)

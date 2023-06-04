@@ -11,7 +11,6 @@ import { useContext, useEffect, useState } from 'react';
 import { deepOrange } from '@mui/material/colors';
 
 
-
 const Header = () => {
 
   // Signing users out of the site
