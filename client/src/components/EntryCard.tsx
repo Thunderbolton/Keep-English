@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useContext, useState } from 'react'
 import EditEntry from './EditEntry';
-import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, Collapse, Tooltip, Typography } from '@mui/material';
+import { Avatar, Card, CardActions, CardContent, CardHeader, Collapse, Tooltip, Typography } from '@mui/material';
 import { Edit, Delete, } from '@material-ui/icons';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
@@ -38,27 +38,17 @@ const EntryCard = ({ entries } : { entries: any }) => {
         expand: boolean;
       }
       
-    const ExpandMore = styled((props: ExpandMoreProps) => {
-        const { expand, ...other } = props;
-        return <IconButton {...other} />;
+      const ExpandMore = styled((props: ExpandMoreProps) => {
+        return <IconButton {...props} />;
       })
-      (({ theme, expand }) => ({
-          transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-          transition: theme.transitions.create('transform', {
-          duration: theme.transitions.duration.shortest,
+      (({ expand }) => ({
+        transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
         }),
-      }));
+      );
     
     const expandButtonProps = {
         title: expanded ? "Collapse" : "Expand"
     };
-
-
-    const StyledCardActionArea = styled(CardActionArea)(() => 
-    `.MuiCardActionArea-focusHighlight {
-            background: transparent;
-        }`);
-
 
     const selectCategoryColor = () => {
             switch(entries.category) {
@@ -78,7 +68,6 @@ const EntryCard = ({ entries } : { entries: any }) => {
     // To show edit contents
     const [editform, setEditForm] = useState(false);
     const onClick = () => {setEditForm(!editform)};
-
     
     const deleteEntry = async () => {
         const response = await axios.delete(`api/entries/${_id}`, {
@@ -95,30 +84,27 @@ const EntryCard = ({ entries } : { entries: any }) => {
 
     return (
         <div>
-            <StyledCardActionArea disableRipple> 
-                <Card elevation={2} sx={{ maxWidth: 450, minHeight: 350, border: 1, borderColor: '#BFC9CA', borderRadius: 4, '&:hover': {transform: expanded ? 'scale(1)' : 'scale(1.1)', border: 1, borderColor: selectCategoryColor(), borderRadius: 4,  overflow: 'hidden' }, transition: '0.2s' }}>
-    
+                <Card elevation={2} sx={{ boxSizing: 'border-box', maxWidth: 450, minHeight: 150, wordBreak: 'break-all', border: 1, borderColor: '#BFC9CA', borderRadius: 4, '&:hover': { boxShadow: `0 2px 4px ${selectCategoryColor()}`, overflow: 'hidden' } }}>
                     <CardHeader
                     avatar={
-                        entries.category && <Avatar sx={{ bgcolor: selectCategoryColor()}}>
-                        {entries.category.charAt(0)}
+                        entries.category && <Avatar sx={{ bgcolor: selectCategoryColor()}} onClick={handleExpandClick}>
+                            {entries.category.charAt(0)}
                         </Avatar>
                     }
-                    title={entries.title}
-                    subheader={new Date(entries.createdAt).toLocaleString('en-GB', dateOptions)}
-                    action={
-                        <ExpandMore
+                    title={<b>{entries.title}</b>}
+                    subheader={new Date(entries.createdAt).toLocaleString('en-GB', dateOptions)}  
+                    action={<ExpandMore
                             expand={expanded}
-                            sx={{color: expandedColor ? "primary" : "blue", }}
+                            sx={{color: expandedColor ? "primary" : "green", }}
                             onClick={handleExpandClick}
                             aria-expanded={expanded}
                             aria-label="show more"
                             >
                             <Tooltip {...expandButtonProps} placement="top">
-                                <ExpandMoreIcon/>
+                                <ExpandMoreIcon />
                             </Tooltip> 
-                        </ExpandMore>     
-                    }
+                        </ExpandMore> 
+                    }  
                     />
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                         <CardContent>
@@ -135,9 +121,9 @@ const EntryCard = ({ entries } : { entries: any }) => {
 
                         </CardContent>
                     </Collapse>
-                    <CardContent>
+                    {/* <CardContent>
                         <li>{entries._id}</li>
-                    </CardContent>
+                    </CardContent> */}
                     <CardActions>
                         <Tooltip title="Delete">
                             <IconButton onClick={deleteEntry}>
@@ -146,7 +132,6 @@ const EntryCard = ({ entries } : { entries: any }) => {
                         </Tooltip>
                     </CardActions>  
                 </Card>
-            </StyledCardActionArea>
         </div>
     );
 }
