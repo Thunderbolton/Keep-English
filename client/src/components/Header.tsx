@@ -2,6 +2,8 @@ import { SignOut } from './SignOut';
 import { Link } from 'react-router-dom';
 import { Avatar, Button, Container } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import LoginIcon from '@mui/icons-material/Login';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import { AuthContext } from "../context/AuthContext";
 import { useContext, useEffect, useState } from 'react';
 import { deepOrange } from '@mui/material/colors';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 
 
 const Header = () => {
@@ -20,24 +24,31 @@ const Header = () => {
     signout()
   }
 
+ 
+  const isSmallScreen = useMediaQuery('(max-width: 600px)');
+  
   const { user } = useContext(AuthContext)
 
   const [welcome, setWelcome] = useState('')
   const [avatar, setAvatar] = useState(false)
 
   useEffect(() => {
-    if (user) {
+    if (user && !isSmallScreen) {
       setWelcome(`Welcome back, ${user.name}`);
       setAvatar(false);
-  
+    
       const welcomeTimer = setTimeout(() => {
         setWelcome('');
         setAvatar(true);
-      }, 4000);
-  
+      }, 2000);
+   
       return () => clearTimeout(welcomeTimer);
-    } else {
+
+    } else if (isSmallScreen) {
       setWelcome('');
+      setAvatar(true);
+      
+    } else {
       setAvatar(false);
     }
   }, [user]);
@@ -55,13 +66,14 @@ const Header = () => {
             variant="h3" 
             sx={{ 
               // border:'2px solid red', 
-              marginLeft: 'auto', 
-              marginRight: 'auto', 
+              position: 'absolute',
+              left: isSmallScreen ? '35%' : '50%',
+              transform: 'translateX(-50%)',
               display: 'flex', 
               alignItems: 'center',
               justifyContent: 'center',
-              flexGrow: 1, 
-              fontSize: 'clamp(1rem, 1.7rem, 2rem)' }}>
+              fontSize: 'clamp(1rem, 1.7rem, 2rem)' 
+              }}>
                 <Link to='/' 
                 style={{ color: 'inherit', textDecoration: 'inherit'}}>Keep English</Link>
             </Typography>
