@@ -1,9 +1,10 @@
 import { SignOut } from './SignOut';
 import { Link } from 'react-router-dom';
-import { Avatar, Button, Container } from '@mui/material';
+import { Avatar, Button, Container, IconButton } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,8 +13,6 @@ import { AuthContext } from "../context/AuthContext";
 import { useContext, useEffect, useState } from 'react';
 import { deepOrange } from '@mui/material/colors';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
-
 
 const Header = () => {
 
@@ -24,74 +23,81 @@ const Header = () => {
     signout()
   }
 
- 
-  const isSmallScreen = useMediaQuery('(max-width: 600px)');
-  
   const { user } = useContext(AuthContext)
 
   const [welcome, setWelcome] = useState('')
-  const [avatar, setAvatar] = useState(false)
+  const [avatar, setAvatar] = useState(true)
+
+  const isSmallScreen = useMediaQuery('(max-width: 600px)');
+  const isMedScreen = useMediaQuery('(max-width: 900px)');
+
+  const headerButtonStyle = {
+    marginLeft: '0.7rem',
+    fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)',
+  };
 
   useEffect(() => {
-    if (user && !isSmallScreen) {
+    if (user && !isSmallScreen && !isMedScreen) {
       setWelcome(`Welcome back, ${user.name}`);
       setAvatar(false);
     
       const welcomeTimer = setTimeout(() => {
         setWelcome('');
         setAvatar(true);
-      }, 2000);
+      }, 1000);
    
       return () => clearTimeout(welcomeTimer);
 
-    } else if (isSmallScreen) {
+    } else if (isSmallScreen || isMedScreen) {
       setWelcome('');
       setAvatar(true);
       
     } else {
-      setAvatar(false);
+      setWelcome('');
+      setAvatar(true);
     }
   }, [user]);
 
   return (
     <>
     <Container maxWidth={false} disableGutters>
-      <Box display="flex" justifyContent="center">
-        <AppBar color='transparent' position='static'>
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <AppBar color='transparent' position='static' sx={{ height: '70px'}}>
           <Toolbar>
             <Link to="/">
-              <HomeIcon sx={{color: 'green'}} />
+              <HomeIcon sx={{color: 'green', position: 'absolute', bottom: '30%' }} />
             </Link>
             <Typography 
             variant="h3" 
             sx={{ 
-              // border:'2px solid red', 
               position: 'absolute',
-              left: isSmallScreen ? '35%' : '50%',
+              left: '50%',
               transform: 'translateX(-50%)',
-              display: 'flex', 
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 'clamp(1rem, 1.7rem, 2rem)' 
+              fontSize: 'clamp(1rem, 1.7rem, 2rem)',
               }}>
                 <Link to='/' 
-                style={{ color: 'inherit', textDecoration: 'inherit'}}>Keep English</Link>
+                style={{ color: 'inherit', textDecoration: 'inherit' }}>Keep English</Link>
             </Typography>
+
             <ul style={{marginLeft: 'auto', display: 'flex', flexWrap: 'nowrap'}}>
-            {user && (
+            {user && !isSmallScreen && (
             <>  
-              <p>{welcome}</p>
-              {avatar ? <Avatar sx={{ bgcolor: deepOrange[500] }}>{user.name.charAt(0).toUpperCase()}</Avatar> : null}
-              <Button 
-                sx={{marginLeft: '0.7rem', fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)'}}  
-                variant="outlined" 
-                color="success"
-                onClick={handleSignOut}
-                >
-                  SIGN OUT
-              </Button>
-            </>)}
-            {!user && (
+              <span className='welcome-message'>{welcome}</span>
+              {avatar ? (
+              <>
+                <Avatar sx={{ bgcolor: deepOrange[500], position: 'absolute', right: '120px', bottom: '15%' }}>{user.name.charAt(0).toUpperCase()}</Avatar>
+                <Button 
+                  sx={{headerButtonStyle, position: 'absolute', right: '15px', bottom: '18%' }}  
+                  variant="outlined" 
+                  color="success"
+                  onClick={handleSignOut}>
+                    SIGN OUT
+                </Button>
+              </>) : null}
+            </>
+            )}
+
+            {!user && !isSmallScreen && (
             <>
               <Button 
                 sx={{marginLeft: '0px'}} 
@@ -101,13 +107,38 @@ const Header = () => {
                   style={{ textDecoration: 'none', color: 'green', fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)' }}>SIGN IN</Link>
                 </Button>
               <Button 
-                sx={{marginLeft: '0.7rem', fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)'}} 
+                sx={headerButtonStyle} 
                 variant="contained" 
                 color="success">
                   <Link to='/register' 
                   style={{ textDecoration: 'none', color: 'white' }}>REGISTER</Link>
               </Button>
-              </>)}
+              </>)}  
+              
+              {isSmallScreen && !user && (
+              <>
+                <IconButton size="small" aria-label="login" component="label">
+                  <Link to='/signin'> 
+                    <LoginIcon />
+                  </Link>  
+                </IconButton>
+                <IconButton size="small" aria-label="add-person" component="label">
+                  <Link to='/register'>
+                  <PersonAddAlt1Icon />
+                  </Link> 
+                </IconButton>
+              </>
+              )}
+              
+              {isSmallScreen && user && avatar && (
+                <>
+                <Avatar sx={{ bgcolor: deepOrange[500] }}>{user.name.charAt(0).toUpperCase()}</Avatar>
+              <IconButton
+                onClick={handleSignOut}>
+                <LogoutIcon />
+              </IconButton>
+                </>
+                )}
             </ul>
           </Toolbar>
         </AppBar>
