@@ -119,7 +119,7 @@ const Register = () => {
                         />
                     
                     <Button disabled={isLoading} variant="contained" type="submit" sx={{marginTop: '15px'}}>Register</Button>
-                    {error && <h4>{error}</h4>}
+                    {error && <h4 className="error-message">{error}</h4>}
                 </Box>    
             </form>
         </>

@@ -116,7 +116,7 @@ const SignIn = () => {
                     >
                     Sign In
                     </Button>
-                    {error && <h4>{error}</h4>}
+                    {error && <h4 className="error-message">{error}</h4>}
                 </Box>
             <p>Not registered? Sign up <Link to='/register'>here</Link></p>
             </form>

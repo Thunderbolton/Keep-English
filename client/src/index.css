@@ -15,13 +15,28 @@
   margin-bottom: 50px;
 }
 
+
+/* Header */
 .welcome-message {
   color: blue;
   font-size: 1rem;
   display: inline-block;
 }
-/* .heading {
-    padding-left: 150px;
-    margin-left: auto;
-    font-size: clamp(1rem, 1.7rem, 2rem);
+
+/* Signin */
+.error-message {
+  color: rgb(209, 5, 5);
+  padding: 0.8rem;
+  background-color: rgb(249, 189, 189);
+  border: 0.16rem solid rgb(209, 5, 5);
+  border-radius: 0.5rem;
+}
+
+/* alt error style */
+/* .error-message {
+  color: white;
+  padding: 5px;
+  background-color: rgb(209, 5, 5);
+  border: 2px solid rgb(209, 5, 5);
+  border-radius: 4px;
 } */
