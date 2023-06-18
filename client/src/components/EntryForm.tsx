@@ -57,7 +57,7 @@ const EntryForm = () => {
 
   return (
     <div>
-      <Box 
+      <Box className='entry-form-container'
         sx={{my: 3}}>      
         <form action="" className="entry-form" autoComplete="off" onSubmit={handleSubmit}>
           <TextField 

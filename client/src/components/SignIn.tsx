@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Button, InputAdornment, TextField, IconButton } from "@mui/material";
+import { Avatar, Card, CardHeader, Typography } from "@mui/material";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Box } from "@mui/system";
 import { useContext, useState, useEffect } from "react";
@@ -70,57 +71,71 @@ const SignIn = () => {
     };
 
     return ( 
-        <>
-            <h2 style={{marginTop: '100px'}}>Sign into your account</h2>
+        <Card 
+          elevation={2} 
+          sx={{  maxWidth: 450, minHeight: 550, margin: '5rem auto', border: 1, borderColor: '#ff7043', borderRadius: 4, display: 'flex',
+          flexDirection: 'column', boxShadow: '0 2px 4px #ff7043'
+          }}>
+          <CardHeader
+          sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '2rem auto 2rem' }}
+                    avatar={
+                        <Avatar sx={{width: 56, height: 56, bgcolor: '#ff5722', fontSize: 30, left: '0.6rem' }}>S</Avatar>
+                    }
+                    title={
+                    <Typography sx={{fontSize: 26, fontWeight:'medium' }}>
+                      ign into your account
+                    </Typography>}
+          >
+          </CardHeader>        
             <form onSubmit={onSubmit}>
                 <Box 
-                sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                maxWidth: '350px',
-                margin: '20px auto'
-                }}>
+                  sx={{
+                  maxWidth: '350px',
+                  margin: 'auto',
+                  }}>
                     <TextField
-                    {...textFieldProps}
-                    id="email"
-                    label="Email"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}             
+                      {...textFieldProps}
+                      id="email"
+                      label="Email"
+                      name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}             
                     />
                     <TextField
-                    {...textFieldProps}
-                    name="password"
-                    label="Password"
-                    type={togglePassword ? 'text' : 'password'}
-                    id="password"
-                    InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton onClick={handleTogglePassword} >
-                              {togglePassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                          </InputAdornment>
-                        )
-                      }}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                      {...textFieldProps}
+                      name="password"
+                      label="Password"
+                      type={togglePassword ? 'text' : 'password'}
+                      id="password"
+                      InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton onClick={handleTogglePassword} >
+                                {togglePassword ? <VisibilityOff /> : <Visibility />}
+                              </IconButton>
+                            </InputAdornment>
+                          )
+                        }}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                     <Button
-                    sx={{marginTop: '15px'}}
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    disabled={isLoading}
+                      sx={{marginTop: '15px'}}
+                      type="submit"
+                      variant="contained"
+                      color="success"
+                      disabled={isLoading}
                     >
                     Sign In
                     </Button>
                     {error && <h4 className="error-message">{error}</h4>}
                 </Box>
-            <p>Not registered? Sign up <Link to='/register'>here</Link></p>
+            <Typography 
+              sx={{ marginTop: '2rem' }}>Not registered? Sign up 
+              <Link to='/register' style={{ textDecoration: 'none', color: '#ff5722' }}> here</Link>
+            </Typography>
             </form>
-        </>
+        </Card>
      );
 }
  
