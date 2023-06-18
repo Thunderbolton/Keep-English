@@ -1,6 +1,6 @@
 import { SignOut } from './SignOut';
 import { Link } from 'react-router-dom';
-import { Avatar, Button, Container, IconButton } from '@mui/material';
+import { Avatar, Button, Container, IconButton, Tooltip } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import LoginIcon from '@mui/icons-material/Login';
@@ -117,26 +117,33 @@ const Header = () => {
               
               {isSmallScreen && !user && (
               <>
-                <IconButton size="small" aria-label="login" component="label">
-                  <Link to='/signin'> 
-                    <LoginIcon />
-                  </Link>  
-                </IconButton>
-                <IconButton size="small" aria-label="add-person" component="label">
-                  <Link to='/register'>
-                  <PersonAddAlt1Icon />
-                  </Link> 
-                </IconButton>
+                <Tooltip title="Sign in">
+                  <IconButton size="small" aria-label="login" component="label" color="inherit" >
+                    <Link to='/signin'> 
+                      <LoginIcon color="warning"/>
+                    </Link>  
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Register">
+                  <IconButton size="small" aria-label="add-person" component="label">
+                    <Link to='/register'>
+                    <PersonAddAlt1Icon color="primary"/>
+                    </Link> 
+                  </IconButton>
+                </Tooltip>
               </>
               )}
               
               {isSmallScreen && user && avatar && (
                 <>
-                <Avatar sx={{ bgcolor: deepOrange[500] }}>{user.name.charAt(0).toUpperCase()}</Avatar>
-              <IconButton
-                onClick={handleSignOut}>
-                <LogoutIcon />
-              </IconButton>
+                  <Avatar sx={{ bgcolor: deepOrange[500] }}>{user.name.charAt(0).toUpperCase()}</Avatar>
+                  <Tooltip title="Sign out">
+                    <IconButton
+                      onClick={handleSignOut}>
+                    <LogoutIcon />
+                    </IconButton>
+                  </Tooltip>
+                  
                 </>
                 )}
             </ul>
