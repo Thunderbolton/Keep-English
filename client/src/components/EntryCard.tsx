@@ -50,6 +50,9 @@ const EntryCard = ({ entries } : { entries: any }) => {
         title: expanded ? "Collapse" : "Expand"
     };
 
+    // Separate entry card text into paragraphs.
+    const paragraphs = entries.comments.split('\n');
+
     const selectCategoryColor = () => {
             switch(entries.category) {
                 case 'Daily':
@@ -84,7 +87,7 @@ const EntryCard = ({ entries } : { entries: any }) => {
 
     return (
         <div>
-            <Card elevation={2} sx={{ boxSizing: 'border-box', maxWidth: 450, minHeight: 150, wordBreak: 'break-all', border: 1, borderColor: '#BFC9CA', borderRadius: 4, '&:hover': { boxShadow: `0 2px 4px ${selectCategoryColor()}`, overflow: 'hidden' } }}>
+            <Card elevation={2} sx={{ boxSizing: 'border-box', maxWidth: 450, minHeight: 150, border: 1, borderColor: '#BFC9CA', borderRadius: 4, '&:hover': { boxShadow: `0 2px 4px ${selectCategoryColor()}`, overflow: 'hidden' } }}>
                     <CardHeader
                     avatar={
                         entries.category && <Avatar sx={{ bgcolor: selectCategoryColor()}} onClick={handleExpandClick}>
@@ -108,9 +111,11 @@ const EntryCard = ({ entries } : { entries: any }) => {
                     />
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                         <CardContent>
-                            <Typography paragraph>
-                                <span>{entries.comments}</span>
-                            </Typography>
+                            {paragraphs.map((paragraph: string, index: number) => (
+                                <Typography key={index} paragraph>
+                                    {paragraph}
+                                </Typography>
+                            ))}
                             
                             <Tooltip title="Edit" placement="top">
                                 <IconButton onClick={onClick}>

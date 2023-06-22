@@ -44,7 +44,7 @@ const Header = () => {
       const welcomeTimer = setTimeout(() => {
         setWelcome('');
         setAvatar(true);
-      }, 1000);
+      }, 4000);
    
       return () => clearTimeout(welcomeTimer);
 
