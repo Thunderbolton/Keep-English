@@ -69,7 +69,7 @@ const EntryForm = () => {
             required
           />
 
-          <FormControl sx={{border: 1, borderColor:'#0000003b', borderRadius:1}}>
+          <FormControl sx={{border: 1, borderColor:'#0000003b', borderRadius: 1}}>
             <FormLabel id="demo-controlled-radio-buttons-group">Category</FormLabel>
               <RadioGroup
                 aria-labelledby="radio-buttons-group"

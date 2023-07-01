@@ -44,7 +44,7 @@ const EditEntry = ({ entries } : { entries: any }) => {
                         <MenuItem value="Exam">Exam</MenuItem> 
                     </TextField> 
                     
-                    <TextField size="small" label="Comments" margin="dense" value={comments} multiline minRows={3}  onChange={(e) => setComments((e.target as HTMLInputElement).value)}/>
+                    <TextField size="small" label="Comments" margin="dense" value={comments} multiline minRows={3} onChange={(e) => setComments((e.target as HTMLInputElement).value)}/>
     
                     <Button variant="contained" color="success" type='submit'>Finish Editing</Button>
                 </Stack>

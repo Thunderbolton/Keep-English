@@ -11,9 +11,9 @@ import { EntriesContext } from '../context/EntryContext';
 import { AuthContext } from "../context/AuthContext";
 
 
-const EntryCard = ({ entries } : { entries: any }) => {
+const EntryCard = ({ entry } : { entry: any }) => {
 
-    const { _id } = entries;
+    const { _id } = entry;
     const { dispatch } = useContext(EntriesContext)
     const { user } = useContext(AuthContext)
       
@@ -51,10 +51,10 @@ const EntryCard = ({ entries } : { entries: any }) => {
     };
 
     // Separate entry card text into paragraphs.
-    const paragraphs = entries.comments.split('\n');
+    const paragraphs = entry.comments.split('\n');
 
     const selectCategoryColor = () => {
-            switch(entries.category) {
+            switch(entry.category) {
                 case 'Daily':
                   return green[400];
                 case 'Business':
@@ -90,12 +90,12 @@ const EntryCard = ({ entries } : { entries: any }) => {
             <Card elevation={2} sx={{ boxSizing: 'border-box', maxWidth: 450, minHeight: 150, border: 1, borderColor: '#BFC9CA', borderRadius: 4, '&:hover': { boxShadow: `0 2px 4px ${selectCategoryColor()}`, overflow: 'hidden' } }}>
                     <CardHeader
                     avatar={
-                        entries.category && <Avatar sx={{ bgcolor: selectCategoryColor()}} onClick={handleExpandClick}>
-                            {entries.category.charAt(0)}
+                        entry.category && <Avatar sx={{ bgcolor: selectCategoryColor()}} onClick={handleExpandClick}>
+                            {entry.category.charAt(0)}
                         </Avatar>
                     }
-                    title={<b>{entries.title}</b>}
-                    subheader={new Date(entries.createdAt).toLocaleString('en-GB', dateOptions)}  
+                    title={<b>{entry.title}</b>}
+                    subheader={new Date(entry.createdAt).toLocaleString('en-GB', dateOptions)}  
                     action={<ExpandMore
                             expand={expanded}
                             sx={{color: expandedColor ? "primary" : "green", }}
@@ -122,7 +122,7 @@ const EntryCard = ({ entries } : { entries: any }) => {
                                     <Edit></Edit>
                                 </IconButton>
                             </Tooltip>
-                            { editform ? <EditEntry entries={entries} /> : null }
+                            { editform ? <EditEntry entries={entry} /> : null }
 
                         </CardContent>
                     </Collapse>
