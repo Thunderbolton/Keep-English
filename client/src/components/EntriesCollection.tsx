@@ -12,6 +12,8 @@ const EntriesCollection = () => {
 
     const [selectedCategory, setSelectedCategory] = useState('');
 
+    console.log(selectedCategory)
+
     return (
       <>
           {userEntries.length === 0 ? (
@@ -24,16 +26,20 @@ const EntriesCollection = () => {
               <Grid container justifyContent="space-evenly" alignItems="center" gap={4}>
 
               {userEntries.map((entry: any) => {
-                if (selectedCategory && entry.category !== selectedCategory) {
-                  return null;
-                }
-                return (
-                  <Grid item key={entry._id}>
-                    <EntryCard entry={entry} />
-                  </Grid>
-                );
+                if (!selectedCategory || selectedCategory === 'All') {
+                  return (
+                    <Grid item key={entry._id}>
+                      <EntryCard entry={entry} />
+                    </Grid>
+                  )};
+                
+                if (entry.category === selectedCategory) {
+                  return (
+                    <Grid item key={entry._id}>
+                      <EntryCard entry={entry} />
+                    </Grid>
+                  )};
               })}
-
               </Grid>  
             </Container>
           </>

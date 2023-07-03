@@ -38,6 +38,7 @@ const EntriesSort = ({ onCategoryChange }: { onCategoryChange: Function }) => {
             label="Category"
             onChange={handleChange}
           >
+            <MenuItem value="All">All</MenuItem>
             <MenuItem value="Daily">Daily</MenuItem>
             <MenuItem value="Business">Business</MenuItem>
             <MenuItem value="Travel">Travel</MenuItem>
