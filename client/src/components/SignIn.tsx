@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Button, InputAdornment, TextField, IconButton } from "@mui/material";
+import { Button, InputAdornment, TextField, IconButton, Container } from "@mui/material";
 import { Avatar, Card, CardHeader, Typography } from "@mui/material";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Box } from "@mui/system";
@@ -70,8 +70,9 @@ const SignIn = () => {
         } 
     };
 
-    return ( 
-        <Card 
+    return (
+      <Container>
+        <Card
           elevation={2} 
           sx={{  maxWidth: 450, minHeight: 550, margin: '5rem auto', border: 1, borderColor: '#ff7043', borderRadius: 4, display: 'flex',
           flexDirection: 'column', boxShadow: '0 2px 4px #ff7043'
@@ -136,6 +137,7 @@ const SignIn = () => {
             </Typography>
             </form>
         </Card>
+      </Container> 
      );
 }
  

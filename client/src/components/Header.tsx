@@ -28,7 +28,7 @@ const Header = () => {
   const [welcome, setWelcome] = useState('')
   const [avatar, setAvatar] = useState(true)
 
-  const isSmallScreen = useMediaQuery('(max-width: 600px)');
+  const isSmallScreen = useMediaQuery('(max-width: 660px)');
   const isMedScreen = useMediaQuery('(max-width: 900px)');
 
   const headerButtonStyle = {
@@ -68,12 +68,12 @@ const Header = () => {
               <HomeIcon sx={{color: 'green', position: 'absolute', bottom: '30%' }} />
             </Link>
             <Typography 
-            variant="h3" 
             sx={{ 
               position: 'absolute',
               left: '50%',
               transform: 'translateX(-50%)',
-              fontSize: 'clamp(1rem, 1.7rem, 2rem)',
+              fontSize: 'clamp(1.3rem, 2rem, 2.4rem)',
+              // fontWeight: 'bold'
               }}>
                 <Link to='/' 
                 style={{ color: 'inherit', textDecoration: 'inherit' }}>Keep English</Link>

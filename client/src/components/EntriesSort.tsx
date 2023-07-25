@@ -25,11 +25,11 @@ const EntriesSort = ({ onCategoryChange }: { onCategoryChange: Function }) => {
     <>
       <Tooltip title="Sort">
         <IconButton>
-          <SortIcon onClick={sortEntriesToggle} />
+          <SortIcon onClick={sortEntriesToggle} fontSize='large' />
         </IconButton>
       </Tooltip>
       {showSortOptions && (
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
           <InputLabel id="select-label">Category</InputLabel>
           <Select
             labelId="category-select-label"

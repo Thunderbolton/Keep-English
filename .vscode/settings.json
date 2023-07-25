@@ -1,0 +1,23 @@
+{
+    "terminal.integrated.profiles.windows": {
+
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "GitBash": {
+        "path": "${env:homepath}/Software/git/current/bin/bash.exe",
+        "icon": "terminal-bash"
+      }
+    },
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "workbench.settings.openDefaultSettings": true
+}

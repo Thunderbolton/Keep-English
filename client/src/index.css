@@ -1,6 +1,23 @@
+html {
+  background-color: #EDF8FD;
+}
+
 .App {
   text-align: center;
   list-style: none;
+  background-color: #EDF8FD;
+  /* background-color: #F9F8F6; */
+  /* background-color: #FCF8FB; */
+  /* background-color: #FCF3F8; */
+}
+
+/* Header */
+
+.welcome-message {
+  color: blue;
+  font-size: 1rem;
+  display: inline-block; 
+  /* background-color: #FCF3F8; */
 }
 
 .entry-form {
@@ -8,9 +25,40 @@
   flex-direction: column;
   width: 50%;
   margin: 0 auto;
+  /* background-color: #FCF3F8; */
+
 }
 
+.entries-collection {
+  background-image: url("/src/img/Waimakariri2.svg");
+  background-position: top;
+  /* background-position-y: 5%; */
+  background-size: 2200px;
+  background-repeat: no-repeat;
+}
 
+.sorted-entries {
+  margin-top: 1rem;
+}
+
+/* THEME COLOR IDEAS */
+
+/* https://realtimecolors.com/?colors=040103-fcf3f8-b52c33-ebc9ad-633918 */
+
+
+/* https://realtimecolors.com/?colors=030507-e9f0f6-cd7ecd-e4cfb9-40a540 */
+
+/* https://realtimecolors.com/?colors=021212-e8fcfc-f18583-f8dcbf-f183b8 */
+
+/* https://realtimecolors.com/?colors=0c1405-f4fbef-5a92d3-e5f4d7-d35a92 */
+
+/* https://realtimecolors.com/?colors=000000-fcfffa-057f94-e7bffd-941a05 */
+
+/* --text: #010a03;
+--background: #cffcdd;
+--primary: #5df4d8;
+--secondary: #fccfed;
+--accent: #f45d79; */
 
 /* .entry-form-container {
     --s: 250px; 
@@ -40,32 +88,12 @@
 
 
 .entries-collection-container {
-  margin-top: 30px;
-  margin-bottom: 50px;
-}
-
-
-/* Header */
-.welcome-message {
-  color: blue;
-  font-size: 1rem;
-  display: inline-block;
+  padding-top: 2rem;
+  padding-bottom: 6rem;
+  width: 100%;  
 }
 
 /* Signin */
-/* 
-.signin-container {
-
-
-  --s: 300px;
-    
-    --_g: #0000 90deg,#fff 0;
-    background:
-      conic-gradient(from 116.56deg at calc(100%/3) 0   ,var(--_g)),
-      conic-gradient(from -63.44deg at calc(200%/3) 100%,var(--_g))
-      #e3efee;
-    background-size: var(--s) var(--s);
-} */
 
 .error-message {
   color: rgb(209, 5, 5);
