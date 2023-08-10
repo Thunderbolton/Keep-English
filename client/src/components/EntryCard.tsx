@@ -3,10 +3,13 @@ import { useContext, useState } from 'react'
 import EditEntry from './EditEntry';
 import { Avatar, Card, CardActions, CardContent, CardHeader, Collapse, Tooltip, Typography } from '@mui/material';
 import { Edit, Delete, } from '@material-ui/icons';
+import FolderIcon from '@mui/icons-material/Folder';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
+import TodayIcon from '@mui/icons-material/Today';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
-import { blue, green, grey, orange, red } from '@mui/material/colors';
 import { EntriesContext } from '../context/EntryContext';
 import { AuthContext } from "../context/AuthContext";
 
@@ -38,13 +41,13 @@ const EntryCard = ({ entry } : { entry: any }) => {
         expand: boolean;
       }
       
-      const ExpandMore = styled((props: ExpandMoreProps) => {
-        return <IconButton {...props} />;
-      })
-      (({ expand }) => ({
-        transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-        }),
-      );
+    const ExpandMore = styled((props: ExpandMoreProps) => {
+    return <IconButton {...props} />;
+    })
+    (({ expand }) => ({
+    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+    }),
+    );
     
     const expandButtonProps = {
         title: expanded ? "Collapse" : "Expand"
@@ -56,15 +59,15 @@ const EntryCard = ({ entry } : { entry: any }) => {
     const selectCategoryColor = () => {
             switch(entry.category) {
                 case 'Daily':
-                  return green[400];
+                  return <Avatar sx={{bgcolor: '#5799d3'}}><TodayIcon /></Avatar>
                 case 'Business':
-                  return blue[400]; 
+                  return <Avatar sx={{bgcolor: '#933306'}}><FolderIcon /></Avatar>; 
                 case 'Travel':
-                  return orange[400];
+                  return <Avatar sx={{bgcolor: '#f96781'}}><AirplaneTicketIcon/></Avatar>;
                 case 'Exam':
-                  return red[400]; 
+                  return <Avatar sx={{bgcolor: '#044766'}}><LibraryBooksIcon /></Avatar>; 
                 default:
-                  return grey[400];
+                  return <FolderIcon />;
               }
           }
 
@@ -90,15 +93,15 @@ const EntryCard = ({ entry } : { entry: any }) => {
             <Card elevation={2} sx={{ boxSizing: 'border-box', maxWidth: 450, minHeight: 150, border: 1, borderColor: '#BFC9CA', borderRadius: 4, '&:hover': { boxShadow: `0 2px 4px ${selectCategoryColor()}`, overflow: 'hidden' } }}>
                     <CardHeader
                     avatar={
-                        entry.category && <Avatar sx={{ bgcolor: selectCategoryColor()}} onClick={handleExpandClick}>
-                            {entry.category.charAt(0)}
+                        entry.category && <Avatar sx={{bgcolor: '#933306'}} onClick={handleExpandClick}>
+                            {selectCategoryColor()}
                         </Avatar>
                     }
                     title={<b>{entry.title}</b>}
                     subheader={new Date(entry.createdAt).toLocaleString('en-GB', dateOptions)}  
                     action={<ExpandMore
                             expand={expanded}
-                            sx={{color: expandedColor ? "primary" : "green", }}
+                            sx={{color: expandedColor ? "primary" : "#933306", }}
                             onClick={handleExpandClick}
                             aria-expanded={expanded}
                             aria-label="show more"

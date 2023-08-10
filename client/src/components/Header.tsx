@@ -1,6 +1,7 @@
 import { SignOut } from './SignOut';
 import { Link } from 'react-router-dom';
 import { Avatar, Button, Container, IconButton, Tooltip } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import LoginIcon from '@mui/icons-material/Login';
@@ -11,10 +12,16 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { AuthContext } from "../context/AuthContext";
 import { useContext, useEffect, useState } from 'react';
-import { deepOrange } from '@mui/material/colors';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 const Header = () => {
+
+  const theme = useTheme();
+  const primaryColor = theme.palette.primary.main;
+  // const primaryLightColor = theme.palette.primary.light;
+  // const primaryDarkColor = theme.palette.primary.dark;
+
+  const infoColor = theme.palette.info.main;
 
   // Signing users out of the site
   const { signout } = SignOut() 
@@ -34,6 +41,8 @@ const Header = () => {
   const headerButtonStyle = {
     marginLeft: '0.7rem',
     fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)',
+    color: infoColor,
+    bgcolor: infoColor
   };
 
   useEffect(() => {
@@ -65,7 +74,7 @@ const Header = () => {
         <AppBar color='transparent' position='static' sx={{ height: '70px'}}>
           <Toolbar>
             <Link to="/">
-              <HomeIcon sx={{color: 'green', position: 'absolute', bottom: '30%' }} />
+              <HomeIcon sx={{ color: primaryColor, position: 'absolute', bottom: '30%' }} />
             </Link>
             <Typography 
             sx={{ 
@@ -85,11 +94,11 @@ const Header = () => {
               <span className='welcome-message'>{welcome}</span>
               {avatar ? (
               <>
-                <Avatar sx={{ bgcolor: deepOrange[500], position: 'absolute', right: '120px', bottom: '15%' }}>{user.name.charAt(0).toUpperCase()}</Avatar>
+                <Avatar sx={{ bgcolor: '#FCB1BE', position: 'absolute', right: '120px', bottom: '15%' }}>{user.name.charAt(0).toUpperCase()}</Avatar>
                 <Button 
                   sx={{headerButtonStyle, position: 'absolute', right: '15px', bottom: '18%' }}  
                   variant="outlined" 
-                  color="success"
+                  color='info'
                   onClick={handleSignOut}>
                     SIGN OUT
                 </Button>
@@ -101,17 +110,17 @@ const Header = () => {
             <>
               <Button 
                 sx={{marginLeft: '0px'}} 
-                variant="outlined" 
-                color="success">
+                variant='outlined' 
+                color='info'>
                 <Link to='/signin' 
-                  style={{ textDecoration: 'none', color: 'green', fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)' }}>SIGN IN</Link>
+                  style={{ textDecoration: 'none', color: '#044766', fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)' }}>SIGN IN</Link>
                 </Button>
               <Button 
                 sx={headerButtonStyle} 
-                variant="contained" 
-                color="success">
+                variant='contained'
+                color='info'>
                   <Link to='/register' 
-                  style={{ textDecoration: 'none', color: 'white' }}>REGISTER</Link>
+                  style={{ textDecoration: 'none', color: '#fff' }}>REGISTER</Link>
               </Button>
               </>)}  
               
@@ -136,7 +145,7 @@ const Header = () => {
               
               {isSmallScreen && user && avatar && (
                 <>
-                  <Avatar sx={{ bgcolor: deepOrange[500] }}>{user.name.charAt(0).toUpperCase()}</Avatar>
+                  <Avatar sx={{ bgcolor: '#FCB1BE' }}>{user.name.charAt(0).toUpperCase()}</Avatar>
                   <Tooltip title="Sign out">
                     <IconButton
                       onClick={handleSignOut}>

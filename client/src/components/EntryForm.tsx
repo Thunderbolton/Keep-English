@@ -1,6 +1,7 @@
 import { Button, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Box } from '@mui/system';
+import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { useContext, useState } from 'react';
 import { EntriesContext } from '../context/EntryContext';
@@ -84,8 +85,9 @@ const EntryForm = () => {
 
   return (
     <div>
+      <Typography variant='h4' sx={{mt: 4}}>Create a new Entry</Typography>
       <Box className='entry-form-container'
-        sx={{my: 3}}>      
+        sx={{my: 1}}>      
         <form action="" className="entry-form" autoComplete="off" onSubmit={handleSubmit}>
           <TextField 
             sx={{my: 3, ...textfieldStyle}}

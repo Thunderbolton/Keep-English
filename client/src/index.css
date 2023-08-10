@@ -35,6 +35,7 @@ html {
   /* background-position-y: 5%; */
   background-size: 2200px;
   background-repeat: no-repeat;
+  padding-top: 1.5rem;
 }
 
 .sorted-entries {
