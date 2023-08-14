@@ -85,12 +85,12 @@ const EntryForm = () => {
 
   return (
     <div>
-      <Typography variant='h4' sx={{mt: 4}}>Create a new Entry</Typography>
+      <Typography variant='h4' sx={{ mt: 4 }}>Create a new Entry</Typography>
       <Box className='entry-form-container'
-        sx={{my: 1}}>      
+        sx={{ my: 1 }}>      
         <form action="" className="entry-form" autoComplete="off" onSubmit={handleSubmit}>
           <TextField 
-            sx={{my: 3, ...textfieldStyle}}
+            sx={{ my: 3, ...textfieldStyle }}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             variant="outlined" 
@@ -101,15 +101,16 @@ const EntryForm = () => {
               style: { color: primaryColor },
             }}
           />
-          <FormControl sx={{border: 2, borderColor: infoLightColor, borderRadius: 1}}>
-            <FormLabel id="radio-buttons-group">Category</FormLabel>
+          <FormControl sx={{ border: 2, borderColor: infoLightColor, borderRadius: 1 }}>
+            <FormLabel id="radio-buttons-group" sx={{ color: '#066693' }}>Category</FormLabel>
               <RadioGroup
                 aria-labelledby="radio-buttons-group"
                 name="radio-buttons-group"
                 row
-                sx={{margin: 'auto', color: 'gray',
+              
+                sx={{margin: 'auto', color: '#933306',
                 '&.Mui-checked': {
-                  color: buttonColor}}}
+                  color: buttonColor }}}
                 value={category}
                 onChange={handleChange}
               >
@@ -134,9 +135,9 @@ const EntryForm = () => {
           />
        
           <Button 
+            sx={{ bgcolor: title && comments ? primaryColor : buttonColor, "&:hover": { bgcolor: buttonColor }, mt: 1}}
             variant='contained' 
-            
-            sx={{ bgcolor: title && comments ? primaryColor : buttonColor, "&:hover": { bgcolor: buttonColor }, mt: 1}} type='submit'>{buttonText}
+            type='submit'>{buttonText}
           </Button>
         </form> 
       </Box>

@@ -35,17 +35,19 @@ const Header = () => {
   const [welcome, setWelcome] = useState('')
   const [avatar, setAvatar] = useState(true)
 
+  const isSmallestScreen = useMediaQuery('(max-width: 350px)');
   const isSmallScreen = useMediaQuery('(max-width: 660px)');
   const isMedScreen = useMediaQuery('(max-width: 900px)');
 
   const headerButtonStyle = {
     marginLeft: '0.7rem',
     fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)',
-    color: infoColor,
-    bgcolor: infoColor
+    bgcolor: primaryColor
   };
 
+
   useEffect(() => {
+
     if (user && !isSmallScreen && !isMedScreen) {
       setWelcome(`Welcome back, ${user.name}`);
       setAvatar(false);
@@ -60,8 +62,9 @@ const Header = () => {
     } else if (isSmallScreen || isMedScreen) {
       setWelcome('');
       setAvatar(true);
-      
-    } else {
+    }
+    
+    else {
       setWelcome('');
       setAvatar(true);
     }
@@ -71,17 +74,21 @@ const Header = () => {
     <>
     <Container maxWidth={false} disableGutters>
       <Box display="flex" justifyContent="center" alignItems="center">
-        <AppBar color='transparent' position='static' sx={{ height: '70px'}}>
+        <AppBar color='transparent' position='static' sx={{ minHeight: '70px'}}>
           <Toolbar>
-            <Link to="/">
-              <HomeIcon sx={{ color: primaryColor, position: 'absolute', bottom: '30%' }} />
-            </Link>
+            {user && 
+              (
+                <Link to="/">
+                  <HomeIcon sx={{ color: '#FCB1BE', position: 'absolute', bottom: '30%' }} />
+                </Link>
+              )
+            }
             <Typography 
             sx={{ 
               position: 'absolute',
               left: '50%',
               transform: 'translateX(-50%)',
-              fontSize: 'clamp(1.3rem, 2rem, 2.4rem)',
+              fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
               // fontWeight: 'bold'
               }}>
                 <Link to='/' 
@@ -94,7 +101,9 @@ const Header = () => {
               <span className='welcome-message'>{welcome}</span>
               {avatar ? (
               <>
-                <Avatar sx={{ bgcolor: '#FCB1BE', position: 'absolute', right: '120px', bottom: '15%' }}>{user.name.charAt(0).toUpperCase()}</Avatar>
+                <Avatar sx={{ bgcolor: '#066693', position: 'absolute', right: '120px', bottom: '15%' }}>
+                  {user.name.charAt(0).toUpperCase()}
+                </Avatar>
                 <Button 
                   sx={{headerButtonStyle, position: 'absolute', right: '15px', bottom: '18%' }}  
                   variant="outlined" 
@@ -109,52 +118,63 @@ const Header = () => {
             {!user && !isSmallScreen && (
             <>
               <Button 
-                sx={{marginLeft: '0px'}} 
                 variant='outlined' 
-                color='info'>
+                color='primary'>
                 <Link to='/signin' 
                   style={{ textDecoration: 'none', color: '#044766', fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)' }}>SIGN IN</Link>
-                </Button>
+              </Button>
               <Button 
                 sx={headerButtonStyle} 
-                variant='contained'
-                color='info'>
+                variant='contained'>
                   <Link to='/register' 
-                  style={{ textDecoration: 'none', color: '#fff' }}>REGISTER</Link>
+                  style={{ textDecoration: 'none', color: '#fff' }}>REGISTER
+                  </Link>
               </Button>
-              </>)}  
+            </>
+            )}  
               
-              {isSmallScreen && !user && (
+            {isSmallScreen && !user && (
+            <>
+              <Tooltip title="Sign in">
+                <IconButton size="small" aria-label="login" component="label" color="inherit" >
+                  <Link to='/signin'> 
+                    <LoginIcon color="warning"/>
+                  </Link>  
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Register">
+                <IconButton size="small" aria-label="add-person" component="label">
+                  <Link to='/register'>
+                  <PersonAddAlt1Icon color="primary"/>
+                  </Link> 
+                </IconButton>
+              </Tooltip>
+            </>
+            )}
+              
+            {isSmallScreen && user && avatar && !isSmallestScreen && (
               <>
-                <Tooltip title="Sign in">
-                  <IconButton size="small" aria-label="login" component="label" color="inherit" >
-                    <Link to='/signin'> 
-                      <LoginIcon color="warning"/>
-                    </Link>  
+              <Avatar sx={{ bgcolor: '#066693' }}>{user.name.charAt(0).toUpperCase()}</Avatar>
+                <Tooltip title="Sign out">
+                  <IconButton
+                    sx={{ color: '#933306' }}
+                    onClick={handleSignOut}>
+                  <LogoutIcon />
                   </IconButton>
-                </Tooltip>
-                <Tooltip title="Register">
-                  <IconButton size="small" aria-label="add-person" component="label">
-                    <Link to='/register'>
-                    <PersonAddAlt1Icon color="primary"/>
-                    </Link> 
-                  </IconButton>
-                </Tooltip>
+                </Tooltip>  
               </>
-              )}
-              
-              {isSmallScreen && user && avatar && (
-                <>
-                  <Avatar sx={{ bgcolor: '#FCB1BE' }}>{user.name.charAt(0).toUpperCase()}</Avatar>
-                  <Tooltip title="Sign out">
-                    <IconButton
-                      onClick={handleSignOut}>
-                    <LogoutIcon />
-                    </IconButton>
-                  </Tooltip>
-                  
-                </>
-                )}
+            )}
+
+            {isSmallestScreen && (
+              <Tooltip title="Sign out">
+                <IconButton
+                  sx={{ color: '#933306' }}
+                  onClick={handleSignOut}>
+                <LogoutIcon />
+                </IconButton>
+              </Tooltip>  
+            )}
+            
             </ul>
           </Toolbar>
         </AppBar>

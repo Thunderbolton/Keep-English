@@ -4,7 +4,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
 
 
-const EntriesSort = ({ onCategoryChange }: { onCategoryChange: Function }) => {
+const EntriesSort = ({ onCategoryChange } : { onCategoryChange: Function }) => {
 
   const [showSortOptions, setShowSortOptions] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -21,17 +21,33 @@ const EntriesSort = ({ onCategoryChange }: { onCategoryChange: Function }) => {
     onCategoryChange(selectedCategory); 
   };
 
+
+  const formControlStyle = {
+    "& label.Mui-focused": {
+      color: '#933306',
+    },
+    "& .MuiOutlinedInput-root": {
+      '&:hover fieldset': {
+        borderColor: '#be8469',
+      },
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+      border: 2, borderColor: '#be8469'
+    },
+  }
+
   return (
     <>
       <Tooltip title="Sort">
         <IconButton>
-          <SortIcon onClick={sortEntriesToggle} fontSize='large' sx={{}} />
+          <SortIcon onClick={sortEntriesToggle} fontSize='large' sx={{color: '#066693'}} />
         </IconButton>
       </Tooltip>
       {showSortOptions && (
-        <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
+        <FormControl sx={{ m: 1, minWidth: 160, ...formControlStyle}} size='small'>
           <InputLabel id="select-label">Category</InputLabel>
           <Select
+            color='info'
             labelId="category-select-label"
             id="category-select"
             value={selectedCategory}

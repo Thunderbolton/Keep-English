@@ -1,4 +1,5 @@
 import { Button, MenuItem, Stack, TextField } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { useContext, useState } from 'react';
 import axios from 'axios';
 import { EntriesContext } from '../context/EntryContext';
@@ -10,6 +11,8 @@ const EditEntry = ({ entries } : { entries: any }) => {
     const { dispatch } = useContext(EntriesContext)
     const { user } = useContext(AuthContext)
 
+    const theme = useTheme();
+    const primaryColor = theme.palette.primary.main;
     
     // Edit form input states
     const [title, setTitle] = useState(entries.title);
@@ -46,7 +49,7 @@ const EditEntry = ({ entries } : { entries: any }) => {
                     
                     <TextField size="small" label="Comments" margin="dense" value={comments} multiline minRows={3} onChange={(e) => setComments((e.target as HTMLInputElement).value)}/>
     
-                    <Button variant="contained" color="success" type='submit'>Finish Editing</Button>
+                    <Button variant="contained" color="primary" type="submit">Finish Editing</Button>
                 </Stack>
             </form>
           )
