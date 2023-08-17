@@ -101,14 +101,13 @@ const EntryForm = () => {
               style: { color: primaryColor },
             }}
           />
-          <FormControl sx={{ border: 2, borderColor: infoLightColor, borderRadius: 1 }}>
-            <FormLabel id="radio-buttons-group" sx={{ color: '#066693' }}>Category</FormLabel>
+          <FormControl sx={{ border: 2, borderColor: infoLightColor, borderRadius: 1, display: 'flex' }}>
+            <FormLabel id="radio-buttons-group" sx={{ color: '#066693', mt: 0.5 }}>Category</FormLabel>
               <RadioGroup
                 aria-labelledby="radio-buttons-group"
                 name="radio-buttons-group"
                 row
-              
-                sx={{margin: 'auto', color: '#933306',
+                sx={{margin: 'auto', px: 1, color: '#933306',
                 '&.Mui-checked': {
                   color: buttonColor }}}
                 value={category}
@@ -135,7 +134,7 @@ const EntryForm = () => {
           />
        
           <Button 
-            sx={{ bgcolor: title && comments ? primaryColor : buttonColor, "&:hover": { bgcolor: buttonColor }, mt: 1}}
+            sx={{ bgcolor: title && comments ? primaryColor : buttonColor, "&:hover": { bgcolor: buttonColor }, mt: 2}}
             variant='contained' 
             type='submit'>{buttonText}
           </Button>
