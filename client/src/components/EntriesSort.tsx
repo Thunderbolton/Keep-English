@@ -24,7 +24,7 @@ const EntriesSort = ({ onCategoryChange } : { onCategoryChange: Function }) => {
 
   const formControlStyle = {
     "& label.Mui-focused": {
-      color: '#933306',
+      color: '#066693',
     },
     "& .MuiOutlinedInput-root": {
       '&:hover fieldset': {
@@ -45,13 +45,16 @@ const EntriesSort = ({ onCategoryChange } : { onCategoryChange: Function }) => {
       </Tooltip>
       {showSortOptions && (
         <FormControl sx={{ m: 1, minWidth: 160, ...formControlStyle}} size='small'>
-          <InputLabel id="select-label">Category</InputLabel>
+          <InputLabel 
+            id="select-label" 
+            sx={{ color: '#066693' }}>Category
+          </InputLabel>
           <Select
             color='info'
+            label="Category"
             labelId="category-select-label"
             id="category-select"
             value={selectedCategory}
-            label="Category"
             onChange={handleChange}
           >
             <MenuItem value="All">All</MenuItem>

@@ -79,23 +79,25 @@ const Header = () => {
             {user && 
               (
                 <Link to="/">
-                  <HomeIcon sx={{ color: '#FCB1BE', position: 'absolute', bottom: '30%' }} />
+                  <HomeIcon sx={{ color: '#f61d44', position: 'absolute', bottom: '30%' }} />
                 </Link>
               )
             }
             <Typography 
-            sx={{ 
-              position: 'absolute',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
-              // fontWeight: 'bold'
-              }}>
-                <Link to='/' 
-                style={{ color: 'inherit', textDecoration: 'inherit' }}>Keep English</Link>
+              sx={{ 
+                position: 'absolute',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
+                // fontWeight: 'bold'
+                }}>
+              <Link to='/' 
+                style={{ color: 'inherit', textDecoration: 'inherit' }}>Keep English
+              </Link>
             </Typography>
 
-            <ul style={{marginLeft: 'auto', display: 'flex', flexWrap: 'nowrap'}}>
+            <ul style={{ marginLeft: 'auto', display: 'flex', flexWrap: 'nowrap' }}>
+              
             {user && !isSmallScreen && (
             <>  
               <span className='welcome-message'>{welcome}</span>
@@ -127,7 +129,7 @@ const Header = () => {
                 sx={headerButtonStyle} 
                 variant='contained'>
                   <Link to='/register' 
-                  style={{ textDecoration: 'none', color: '#fff' }}>REGISTER
+                    style={{ textDecoration: 'none', color: '#fff' }}>REGISTER
                   </Link>
               </Button>
             </>
@@ -136,25 +138,28 @@ const Header = () => {
             {isSmallScreen && !user && (
             <>
               <Tooltip title="Sign in">
-                <IconButton size="small" aria-label="login" component="label" color="inherit" >
+                <IconButton size="small" aria-label="login" component="label" >
                   <Link to='/signin'> 
-                    <LoginIcon color="warning"/>
+                    <LoginIcon sx={{ color: '#f61d44' }}/>
                   </Link>  
                 </IconButton>
               </Tooltip>
               <Tooltip title="Register">
-                <IconButton size="small" aria-label="add-person" component="label">
+                <IconButton size="small" aria-label="register-user" component="label">
                   <Link to='/register'>
-                  <PersonAddAlt1Icon color="primary"/>
+                  <PersonAddAlt1Icon sx={{ color: '#066693' }} />
                   </Link> 
                 </IconButton>
               </Tooltip>
             </>
             )}
-              
-            {isSmallScreen && user && avatar && !isSmallestScreen && (
-              <>
-              <Avatar sx={{ bgcolor: '#066693' }}>{user.name.charAt(0).toUpperCase()}</Avatar>
+
+            {user && isSmallScreen && !isSmallestScreen ? (
+                <Avatar sx={{ bgcolor: '#066693' }}>
+                  {user.name.charAt(0).toUpperCase()}
+                </Avatar>
+            ) : 
+              user && isSmallestScreen && 
                 <Tooltip title="Sign out">
                   <IconButton
                     sx={{ color: '#933306' }}
@@ -162,19 +167,7 @@ const Header = () => {
                   <LogoutIcon />
                   </IconButton>
                 </Tooltip>  
-              </>
-            )}
-
-            {isSmallestScreen && (
-              <Tooltip title="Sign out">
-                <IconButton
-                  sx={{ color: '#933306' }}
-                  onClick={handleSignOut}>
-                <LogoutIcon />
-                </IconButton>
-              </Tooltip>  
-            )}
-            
+            }
             </ul>
           </Toolbar>
         </AppBar>
