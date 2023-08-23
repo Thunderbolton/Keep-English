@@ -76,12 +76,13 @@ const Header = () => {
       <Box display="flex" justifyContent="center" alignItems="center">
         <AppBar color='transparent' position='static' sx={{ minHeight: '70px'}}>
           <Toolbar>
-            {user && 
-              (
-                <Link to="/">
-                  <HomeIcon sx={{ color: '#f61d44', position: 'absolute', bottom: '30%' }} />
-                </Link>
-              )
+            {
+              user && 
+                (
+                  <Link to="/">
+                    <HomeIcon sx={{ color: '#f61d44', position: 'absolute', bottom: '30%' }} />
+                  </Link>
+                )
             }
             <Typography 
               sx={{ 
@@ -98,76 +99,84 @@ const Header = () => {
 
             <ul style={{ marginLeft: 'auto', display: 'flex', flexWrap: 'nowrap' }}>
               
-            {user && !isSmallScreen && (
-            <>  
-              <span className='welcome-message'>{welcome}</span>
-              {avatar ? (
-              <>
-                <Avatar sx={{ bgcolor: '#066693', position: 'absolute', right: '120px', bottom: '15%' }}>
-                  {user.name.charAt(0).toUpperCase()}
-                </Avatar>
-                <Button 
-                  sx={{headerButtonStyle, position: 'absolute', right: '15px', bottom: '18%' }}  
-                  variant="outlined" 
-                  color='info'
-                  onClick={handleSignOut}>
-                    SIGN OUT
-                </Button>
-              </>) : null}
-            </>
+            {
+              user && !isSmallScreen && (
+                <>  
+                  <span className='welcome-message'>{welcome}</span>
+                  {avatar ? (
+                  <>
+                    <Avatar sx={{ bgcolor: '#066693', position: 'absolute', right: '120px', bottom: '15%' }}>
+                      {user.name.charAt(0).toUpperCase()}
+                    </Avatar>
+                    <Button 
+                      sx={{headerButtonStyle, position: 'absolute', right: '15px', bottom: '18%' }}  
+                      variant="outlined" 
+                      color='info'
+                      onClick={handleSignOut}>
+                        SIGN OUT
+                    </Button>
+                  </>) : null}
+                </>
             )}
 
-            {!user && !isSmallScreen && (
-            <>
-              <Button 
-                variant='outlined' 
-                color='primary'>
-                <Link to='/signin' 
-                  style={{ textDecoration: 'none', color: '#044766', fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)' }}>SIGN IN</Link>
-              </Button>
-              <Button 
-                sx={headerButtonStyle} 
-                variant='contained'>
-                  <Link to='/register' 
-                    style={{ textDecoration: 'none', color: '#fff' }}>REGISTER
-                  </Link>
-              </Button>
-            </>
+            {
+              !user && !isSmallScreen && (
+                <>
+                  <Button 
+                    variant='outlined' 
+                    color='primary'>
+                    <Link to='/signin' 
+                      style={{ textDecoration: 'none', color: '#044766', fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)' }}>SIGN IN</Link>
+                  </Button>
+                  <Button 
+                    sx={headerButtonStyle} 
+                    variant='contained'>
+                      <Link to='/register' 
+                        style={{ textDecoration: 'none', color: '#fff' }}>REGISTER
+                      </Link>
+                  </Button>
+                </>
             )}  
               
-            {isSmallScreen && !user && (
-            <>
-              <Tooltip title="Sign in">
-                <IconButton size="small" aria-label="login" component="label" >
-                  <Link to='/signin'> 
-                    <LoginIcon sx={{ color: '#f61d44' }}/>
-                  </Link>  
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Register">
-                <IconButton size="small" aria-label="register-user" component="label">
-                  <Link to='/register'>
-                  <PersonAddAlt1Icon sx={{ color: '#066693' }} />
-                  </Link> 
-                </IconButton>
-              </Tooltip>
-            </>
+            {
+              isSmallScreen && !user && (
+                <>
+                  <Tooltip title="Sign in">
+                    <IconButton size="small" aria-label="login" component="label" >
+                      <Link to='/signin'> 
+                        <LoginIcon sx={{ color: '#f61d44' }}/>
+                      </Link>  
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Register">
+                    <IconButton size="small" aria-label="register-user" component="label">
+                      <Link to='/register'>
+                      <PersonAddAlt1Icon sx={{ color: '#066693' }} />
+                      </Link> 
+                    </IconButton>
+                  </Tooltip>
+                </>
             )}
 
-            {user && isSmallScreen && !isSmallestScreen ? (
-                <Avatar sx={{ bgcolor: '#066693' }}>
-                  {user.name.charAt(0).toUpperCase()}
-                </Avatar>
-            ) : 
-              user && isSmallestScreen && 
-                <Tooltip title="Sign out">
-                  <IconButton
-                    sx={{ color: '#933306' }}
-                    onClick={handleSignOut}>
-                  <LogoutIcon />
-                  </IconButton>
-                </Tooltip>  
+            {
+              user && isSmallScreen && (
+                <>
+                  <Tooltip title="Sign out">
+                    <IconButton sx={{ color: '#933306' }} onClick={handleSignOut}>
+                      <LogoutIcon />
+                    </IconButton>
+                  </Tooltip>
+
+                  {
+                    !isSmallestScreen && (
+                    <Avatar sx={{ bgcolor: '#066693' }}>
+                      {user.name.charAt(0).toUpperCase()}
+                    </Avatar>
+                  )}
+                </>
+              )
             }
+
             </ul>
           </Toolbar>
         </AppBar>

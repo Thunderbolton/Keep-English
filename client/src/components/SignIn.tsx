@@ -74,13 +74,13 @@ const SignIn = () => {
       <Container>
         <Card
           elevation={2} 
-          sx={{  maxWidth: 450, minHeight: 550, margin: '5rem auto', border: 1, borderColor: '#F96781', borderRadius: 4, display: 'flex',
+          sx={{  maxWidth: 450, minHeight: 550, margin: '5rem auto', border: 1, borderColor: '#f61d44', borderRadius: 4, display: 'flex',
           flexDirection: 'column', boxShadow: '0 2px 4px #FCB1BE'
           }}>
           <CardHeader
           sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '2rem auto 2rem' }}
                     avatar={
-                        <Avatar sx={{width: 56, height: 56, bgcolor: '#F96781', fontSize: 30, left: '0.6rem' }}>S</Avatar>
+                        <Avatar sx={{width: 56, height: 56, bgcolor: '#f61d44', fontSize: 30, left: '0.6rem' }}>S</Avatar>
                     }
                     title={
                     <Typography sx={{fontSize: 26, fontWeight:'medium' }}>
@@ -132,7 +132,7 @@ const SignIn = () => {
                 </Box>
             <Typography 
               sx={{ marginTop: '2rem' }}>Not registered? Sign up 
-              <Link to='/register' style={{ textDecoration: 'none', color: '#F96781' }}> here</Link>
+              <Link to='/register' style={{ textDecoration: 'none', color: '#f61d44' }}> here</Link>
             </Typography>
             </form>
         </Card>

@@ -18,8 +18,8 @@ const EditEntry = ({ entries } : { entries: any }) => {
     const [title, setTitle] = useState(entries.title);
     const [category, setCategory] = useState(entries.category);
     const [comments, setComments] = useState(entries.comments);
-    
 
+  
     const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
 

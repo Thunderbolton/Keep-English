@@ -1,4 +1,4 @@
-import { IconButton, Tooltip, FormControl, MenuItem, InputLabel} from '@mui/material';
+import { IconButton, Tooltip, FormControl, MenuItem, InputLabel, Collapse} from '@mui/material';
 import SortIcon from '@mui/icons-material/Sort';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
@@ -43,28 +43,28 @@ const EntriesSort = ({ onCategoryChange } : { onCategoryChange: Function }) => {
           <SortIcon onClick={sortEntriesToggle} fontSize='large' sx={{color: '#066693'}} />
         </IconButton>
       </Tooltip>
-      {showSortOptions && (
-        <FormControl sx={{ m: 1, minWidth: 160, ...formControlStyle}} size='small'>
-          <InputLabel 
-            id="select-label" 
-            sx={{ color: '#066693' }}>Category
-          </InputLabel>
-          <Select
-            color='info'
-            label="Category"
-            labelId="category-select-label"
-            id="category-select"
-            value={selectedCategory}
-            onChange={handleChange}
-          >
-            <MenuItem value="All">All</MenuItem>
-            <MenuItem value="Daily">Daily</MenuItem>
-            <MenuItem value="Business">Business</MenuItem>
-            <MenuItem value="Travel">Travel</MenuItem>
-            <MenuItem value="Exam">Exam</MenuItem>
-          </Select>
-        </FormControl>
-      )}
+        {showSortOptions && (
+          <FormControl sx={{ m: 1, minWidth: 160, ...formControlStyle}} size='small'>
+            <InputLabel 
+              id="select-label" 
+              sx={{ color: '#066693' }}>Category
+            </InputLabel>
+            <Select
+              color='info'
+              label="Category"
+              labelId="category-select-label"
+              id="category-select"
+              value={selectedCategory}
+              onChange={handleChange}
+            >
+              <MenuItem value="All">All</MenuItem>
+              <MenuItem value="Daily">Daily</MenuItem>
+              <MenuItem value="Business">Business</MenuItem>
+              <MenuItem value="Travel">Travel</MenuItem>
+              <MenuItem value="Exam">Exam</MenuItem>
+            </Select>
+          </FormControl>
+        )} 
     </>
   );
 };

@@ -42,11 +42,11 @@ const EntryCard = ({ entry } : { entry: any }) => {
       }
       
     const ExpandMore = styled((props: ExpandMoreProps) => {
-    return <IconButton {...props} />;
+        return <IconButton {...props} />;
     })
-    (({ expand }) => ({
-    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-    }),
+        (({ expand }) => ({
+            transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+        }),
     );
     
     const expandButtonProps = {
@@ -73,6 +73,7 @@ const EntryCard = ({ entry } : { entry: any }) => {
 
     // To show edit contents
     const [editform, setEditForm] = useState(false);
+
     const onClick = () => {setEditForm(!editform)};
     
     const deleteEntry = async () => {
@@ -93,7 +94,7 @@ const EntryCard = ({ entry } : { entry: any }) => {
             <Card elevation={2} sx={{ boxSizing: 'border-box', maxWidth: 450, minHeight: 150, border: 1, borderColor: '#BFC9CA', borderRadius: 4, '&:hover': { boxShadow: `0 2px 4px ${selectCategoryColor()}`, overflow: 'hidden' } }}>
                     <CardHeader
                     avatar={
-                        entry.category && <Avatar sx={{bgcolor: '#933306'}} onClick={handleExpandClick}>
+                        entry.category && <Avatar sx={{ bgcolor: '#933306' }} onClick={handleExpandClick}>
                             {selectCategoryColor()}
                         </Avatar>
                     }
@@ -119,14 +120,14 @@ const EntryCard = ({ entry } : { entry: any }) => {
                                     {paragraph}
                                 </Typography>
                             ))}
-                            
-                            <Tooltip title="Edit" placement="top">
-                                <IconButton onClick={onClick}>
-                                    <Edit></Edit>
-                                </IconButton>
-                            </Tooltip>
-                            { editform ? <EditEntry entries={entry} /> : null }
-
+                                <Tooltip title="Edit" placement="top">                        
+                                    <IconButton onClick={onClick}>
+                                        <Edit />                                       
+                                    </IconButton> 
+                                </Tooltip>
+                             <Collapse in={editform} timeout="auto" unmountOnExit>  
+                                { editform ? <EditEntry entries={entry} /> : null }                                       
+                            </Collapse>
                         </CardContent>
                     </Collapse>
                     {/* <CardContent>
