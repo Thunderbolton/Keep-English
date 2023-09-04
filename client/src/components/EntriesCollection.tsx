@@ -22,8 +22,7 @@ const EntriesCollection = () => {
       {user && (
         <div className='sorted-entries'>
           <EntriesSort onCategoryChange={setSelectedCategory} />
-          <Container className='entries-collection-container' maxWidth={
-            'xl'}>
+          <Container className='entries-collection-container' >
             <Grid container justifyContent="space-evenly" alignItems="center" gap={6}>
 
               {userEntries.map((entry: any) => {

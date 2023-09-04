@@ -1,23 +1,21 @@
 html {
-  background-color: #EDF8FD;
+  background-color: #FCF8FB;
 }
 
 .App {
   text-align: center;
   list-style: none;
-  background-color: #EDF8FD;
+  /* background-color: #EDF8FD; */
   /* background-color: #F9F8F6; */
-  /* background-color: #FCF8FB; */
+  background-color: #FCF8FB;
   /* background-color: #FCF3F8; */
 }
 
 /* Header */
-
 .welcome-message {
-  color: #f61d44;
+  color: #066693;
   font-size: 1rem;
   display: inline-block; 
-  /* background-color: #FCF3F8; */
 }
 
 .entry-form {
@@ -25,73 +23,23 @@ html {
   flex-direction: column;
   width: 50%;
   margin: 0 auto;
-  /* background-color: #FCF3F8; */
-
 }
 
-.entries-collection {
+.entries-collection { 
   background-image: url("/src/img/Waimakariri2.svg");
   background-position: top;
-  /* background-position-y: 5%; */
-  background-size: 2200px;
-  background-repeat: no-repeat;
+  background-size: 2500px;
+  background-repeat: repeat;
   padding-top: 1.5rem;
 }
-
-.sorted-entries {
-  margin-top: 1rem;
-}
-
-/* THEME COLOR IDEAS */
-
-/* https://realtimecolors.com/?colors=040103-fcf3f8-b52c33-ebc9ad-633918 */
-
-
-/* https://realtimecolors.com/?colors=030507-e9f0f6-cd7ecd-e4cfb9-40a540 */
-
-/* https://realtimecolors.com/?colors=021212-e8fcfc-f18583-f8dcbf-f183b8 */
-
-/* https://realtimecolors.com/?colors=0c1405-f4fbef-5a92d3-e5f4d7-d35a92 */
-
-/* https://realtimecolors.com/?colors=000000-fcfffa-057f94-e7bffd-941a05 */
-
-/* --text: #010a03;
---background: #cffcdd;
---primary: #5df4d8;
---secondary: #fccfed;
---accent: #f45d79; */
-
-/* .entry-form-container {
-    --s: 250px; 
-    
-    --_g: #0000 90deg,#fff 0;
-    background:
-      conic-gradient(from 116.56deg at calc(100%/3) 0   ,var(--_g)),
-      conic-gradient(from -63.44deg at calc(200%/3) 100%,var(--_g))
-      #2FB8AC;
-    background-size: var(--s) var(--s);
-} */
-
-
-/* html {
-  --s: 84px; 
-  
-  --c: #fff;
-  --a:from -30deg at;
-  background:
-    linear-gradient(#0000 50%,#0004 0),
-    conic-gradient(var(--a) 90%,var(--c) 240deg,#0000    0),
-    conic-gradient(var(--a) 75%,#71e9a0  240deg,#0000    0),
-    conic-gradient(var(--a) 25%,#0000    240deg,var(--c) 0),
-    conic-gradient(var(--a) 40%,var(--c) 240deg,#2a6a9b  0);
-  background-size: calc(1.5*var(--s)) var(--s);
-} */
-
 
 .entries-collection-container {
   padding-top: 2rem;
   padding-bottom: 6rem;
-  width: 100%;  
+}
+
+.sorted-entries {
+  margin-top: 1rem;
 }
 
 /* Signin */
