@@ -86,13 +86,13 @@ const EntryCard = ({ entry } : { entry: any }) => {
     const selectCategoryColor = () => {
             switch(entry.category) {
                 case 'Daily':
-                  return <Avatar sx={{bgcolor: '#5799d3'}}><TodayIcon /></Avatar>
+                  return <Avatar sx={{ bgcolor: '#5799d3', color: '#fff' }}><TodayIcon /></Avatar>
                 case 'Business':
-                  return <Avatar sx={{bgcolor: '#933306'}}><FolderIcon /></Avatar>; 
+                  return <Avatar sx={{ bgcolor: '#933306', color: '#fff'}}><FolderIcon /></Avatar>; 
                 case 'Travel':
-                  return <Avatar sx={{bgcolor: '#f96781'}}><AirplaneTicketIcon /></Avatar>;
-                case 'Exam':
-                  return <Avatar sx={{bgcolor: '#044766'}}><LibraryBooksIcon /></Avatar>; 
+                  return <Avatar sx={{ bgcolor: '#f96781', color: '#fff'}}><AirplaneTicketIcon /></Avatar>;
+                case 'Exam': 
+                  return <Avatar sx={{ bgcolor: '#044766', color: '#fff' }}><LibraryBooksIcon /></Avatar>; 
                 default:
                   return <FolderIcon />;
               }
@@ -103,7 +103,7 @@ const EntryCard = ({ entry } : { entry: any }) => {
             <Card elevation={2} sx={{ boxSizing: 'border-box', maxWidth: 450, minHeight: 150, border: 1, borderColor: '#BFC9CA', borderRadius: 4, '&:hover': { boxShadow: `0 2px 4px ${selectCategoryColor()}`, overflow: 'hidden' } }}>
                     <CardHeader
                     avatar={
-                        entry.category && <Avatar sx={{ bgcolor: '#933306' }} onClick={handleExpandClick}>
+                        entry.category && <Avatar onClick={handleExpandClick}>
                             {selectCategoryColor()}
                         </Avatar>
                     }

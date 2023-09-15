@@ -1,4 +1,5 @@
-import { IconButton, Tooltip, FormControl, MenuItem, InputLabel, Collapse} from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { IconButton, Tooltip, FormControl, MenuItem, InputLabel } from '@mui/material';
 import SortIcon from '@mui/icons-material/Sort';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
@@ -9,6 +10,8 @@ const EntriesSort = ({ onCategoryChange } : { onCategoryChange: Function }) => {
   const [showSortOptions, setShowSortOptions] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
 
+  const theme = useTheme();
+  const primaryColor = theme.palette.primary.main;
 
   const sortEntriesToggle = () => {
     setShowSortOptions(!showSortOptions);
@@ -24,7 +27,7 @@ const EntriesSort = ({ onCategoryChange } : { onCategoryChange: Function }) => {
 
   const formControlStyle = {
     "& label.Mui-focused": {
-      color: '#066693',
+      color: primaryColor,
     },
     "& .MuiOutlinedInput-root": {
       '&:hover fieldset': {
@@ -40,14 +43,14 @@ const EntriesSort = ({ onCategoryChange } : { onCategoryChange: Function }) => {
     <>
       <Tooltip title="Sort">
         <IconButton>
-          <SortIcon onClick={sortEntriesToggle} fontSize='large' sx={{color: '#066693'}} />
+          <SortIcon onClick={sortEntriesToggle} fontSize='large' color='success' />
         </IconButton>
       </Tooltip>
         {showSortOptions && (
-          <FormControl sx={{ m: 1, minWidth: 160, ...formControlStyle}} size='small'>
+          <FormControl sx={{ m: 1, minWidth: 160, ...formControlStyle }} size='small'>
             <InputLabel 
               id="select-label" 
-              sx={{ color: '#066693' }}>Category
+              sx={{ color: primaryColor }}>Category
             </InputLabel>
             <Select
               color='info'

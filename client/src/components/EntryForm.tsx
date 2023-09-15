@@ -42,9 +42,6 @@ const EntryForm = () => {
     "& .MuiOutlinedInput-notchedOutline": {
       border: 2, borderColor: infoLightColor, borderRadius: 1
     },
-    // "& .MuiInputBase-input": {
-    //   color: primaryLightColor,
-    // }, /// INPUT TEXT COLOUR
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,12 +99,12 @@ const EntryForm = () => {
             }}
           />
           <FormControl sx={{ border: 2, borderColor: infoLightColor, borderRadius: 1, display: 'flex' }}>
-            <FormLabel id="radio-buttons-group" sx={{ color: '#066693', mt: 0.5 }}>Category</FormLabel>
+            <FormLabel id="radio-buttons-group" sx={{ color: primaryColor, mt: 0.5 }}>Category</FormLabel>
               <RadioGroup
                 aria-labelledby="radio-buttons-group"
                 name="radio-buttons-group"
                 row
-                sx={{margin: 'auto', px: 1, color: '#933306',
+                sx={{margin: 'auto', px: 1, color: infoColor,
                 '&.Mui-checked': {
                   color: buttonColor }}}
                 value={category}

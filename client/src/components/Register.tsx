@@ -72,16 +72,16 @@ const Register = () => {
     };
         
     return ( 
-        <Container>
+      <Container sx={{ minHeight: '100vh' }}>
             <Card
             elevation={2} 
-            sx={{  maxWidth: 450, minHeight: 550, margin: '5rem auto', border: 1, borderColor: '#066693', borderRadius: 4, display: 'flex',
+            sx={{ maxWidth: 450, minHeight: 550, margin: '5rem auto', border: 1, borderColor: '#066693', borderRadius: 4, display: 'flex',
             flexDirection: 'column', boxShadow: '0 2px 4px #69a3be'
             }}>
                 <CardHeader
                     sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '2rem auto 2rem' }}
                     avatar={
-                        <Avatar sx={{width: 56, height: 56, bgcolor: '#066693', fontSize: 30, left: '0.6rem' }}>C</Avatar>
+                        <Avatar sx={{width: 56, height: 56, bgcolor: '#066693', color: '#fff', fontSize: 30, left: '0.6rem' }}>C</Avatar>
                     }
                     title={
                         <Typography sx={{fontSize: 26, fontWeight: 'medium' }}>
@@ -133,16 +133,18 @@ const Register = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             />
                         <Button 
-                            sx={{ marginTop: '15px', bgcolor: name && email && password ? '#f61d44' : '#FCB1BE' }}
+                            sx={{ marginTop: '15px', color: '#fff', bgcolor: name && email && password ? '#f61d44' : '#f8607c', '&:hover': {
+                                backgroundColor: '#f61d44'
+                            } }}
                             disabled={isLoading} 
                             variant="contained" 
-                            color="secondary"
-                            type="submit" >Register
+                            color="info"
+                            type="submit">Register
                         </Button>
-                        {error && <h4 className="error-message">{error}</h4>}
+                            {error && <h4 className="error-message">{error}</h4>}
                         <Typography 
                             sx={{ marginTop: '2rem' }}>Already registered? Sign in 
-                            <Link to='/signin' style={{ textDecoration: 'none', color: '#066693' }}> here</Link>
+                            <Link to='/signin' style={{ textDecoration: 'none', color: '#4DB3E4' }}> here</Link>
                         </Typography>
                     </Box>    
                 </form> 

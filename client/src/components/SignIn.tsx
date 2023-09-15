@@ -71,16 +71,16 @@ const SignIn = () => {
     };
 
     return (
-      <Container>
+      <Container sx={{ minHeight: '100vh' }}>
         <Card
           elevation={2} 
-          sx={{  maxWidth: 450, minHeight: 550, margin: '5rem auto', border: 1, borderColor: '#f61d44', borderRadius: 4, display: 'flex',
+          sx={{ maxWidth: 450, minHeight: 550, margin: '5rem auto', border: 1, borderColor: '#f61d44', borderRadius: 4, display: 'flex',
           flexDirection: 'column', boxShadow: '0 2px 4px #FCB1BE'
           }}>
           <CardHeader
           sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '2rem auto 2rem' }}
                     avatar={
-                        <Avatar sx={{width: 56, height: 56, bgcolor: '#f61d44', fontSize: 30, left: '0.6rem' }}>S</Avatar>
+                        <Avatar sx={{width: 56, height: 56, bgcolor: '#f61d44', color: '#fff', fontSize: 30, left: '0.6rem',  }}>S</Avatar>
                     }
                     title={
                     <Typography sx={{fontSize: 26, fontWeight:'medium' }}>
@@ -121,7 +121,9 @@ const SignIn = () => {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                     <Button
-                      sx={{ marginTop: '15px', bgcolor: email && password ? '#066693' : '#69a3be' }}
+                      sx={{ marginTop: '15px', color: '#fff', bgcolor: email && password ? '#066693' : '#69a3be', '&:hover': {
+                        backgroundColor: '#066693'
+                    }}}
                       type="submit"
                       variant="contained"
                       disabled={isLoading}

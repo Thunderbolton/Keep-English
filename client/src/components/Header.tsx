@@ -102,14 +102,14 @@ const Header = () => {
             {
               user && !isSmallScreen && (
                 <>  
-                  <span className='welcome-message'>{welcome}</span>
+                  <span className='welcome-message' style={{ color: primaryColor }}>{welcome}</span>
                   {avatar ? (
                   <>
-                    <Avatar sx={{ bgcolor: '#066693', position: 'absolute', right: '120px', bottom: '15%' }}>
+                    <Avatar sx={{ bgcolor: '#066693', color: '#fff', position: 'absolute', right: '120px', bottom: '15%' }}>
                       {user.name.charAt(0).toUpperCase()}
                     </Avatar>
                     <Button 
-                      sx={{headerButtonStyle, position: 'absolute', right: '15px', bottom: '18%' }}  
+                      sx={{ headerButtonStyle, position: 'absolute', right: '15px', bottom: '18%' }}  
                       variant="outlined" 
                       color='info'
                       onClick={handleSignOut}>
@@ -126,7 +126,7 @@ const Header = () => {
                     variant='outlined' 
                     color='primary'>
                     <Link to='/signin' 
-                      style={{ textDecoration: 'none', color: '#044766', fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)' }}>SIGN IN</Link>
+                      style={{ textDecoration: 'none', color: primaryColor, fontSize: 'clamp(0.2rem, 0.8rem, 1.5rem)' }}>SIGN IN</Link>
                   </Button>
                   <Button 
                     sx={headerButtonStyle} 
@@ -151,7 +151,7 @@ const Header = () => {
                   <Tooltip title="Register">
                     <IconButton size="small" aria-label="register-user" component="label">
                       <Link to='/register'>
-                      <PersonAddAlt1Icon sx={{ color: '#066693' }} />
+                      <PersonAddAlt1Icon sx={{ color: '#70B3E4' }} />
                       </Link> 
                     </IconButton>
                   </Tooltip>
@@ -162,14 +162,14 @@ const Header = () => {
               user && isSmallScreen && (
                 <>
                   <Tooltip title="Sign out">
-                    <IconButton sx={{ color: '#933306' }} onClick={handleSignOut}>
+                    <IconButton color='info' onClick={handleSignOut}>
                       <LogoutIcon />
                     </IconButton>
                   </Tooltip>
 
                   {
                     !isSmallestScreen && (
-                    <Avatar sx={{ bgcolor: '#066693' }}>
+                    <Avatar sx={{ bgcolor: '#066693', color: '#fff' }}>
                       {user.name.charAt(0).toUpperCase()}
                     </Avatar>
                   )}
