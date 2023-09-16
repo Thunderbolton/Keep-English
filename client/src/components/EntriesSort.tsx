@@ -42,8 +42,8 @@ const EntriesSort = ({ onCategoryChange } : { onCategoryChange: Function }) => {
   return (
     <>
       <Tooltip title="Sort">
-        <IconButton>
-          <SortIcon onClick={sortEntriesToggle} fontSize='large' color='success' />
+        <IconButton onClick={sortEntriesToggle}>
+          <SortIcon  fontSize='large' color='success' />
         </IconButton>
       </Tooltip>
         {showSortOptions && (

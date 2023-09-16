@@ -33,7 +33,6 @@ const EntryCard = ({ entry } : { entry: any }) => {
         }
     };
 
-      
     const dateOptions: Intl.DateTimeFormatOptions = {
         weekday: 'long',
         year: 'numeric',
@@ -80,7 +79,7 @@ const EntryCard = ({ entry } : { entry: any }) => {
     };
 
 
-    // Separate entry card text into paragraphs.
+    // Separate entry card text into paragraphs
     const paragraphs = entry.comments.split('\n');
 
     const selectCategoryColor = () => {
