@@ -21,7 +21,7 @@ const Header = () => {
   // const primaryLightColor = theme.palette.primary.light;
   // const primaryDarkColor = theme.palette.primary.dark;
 
-  const infoColor = theme.palette.info.main;
+  // const infoColor = theme.palette.info.main;
 
   // Signing users out of the site
   const { signout } = SignOut() 
