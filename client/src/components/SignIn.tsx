@@ -64,7 +64,7 @@ const SignIn = () => {
                     setError(`Could not sign in: ${error.response.data.mssg}`)
                     setIsLoading(false)
                   } else {
-                    setError('Sign in failed')
+                    setError(`Sign in failed ${error.response.data.mssg}`)
                     setIsLoading(false)
                   }
         } 
