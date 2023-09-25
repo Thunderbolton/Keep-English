@@ -12,7 +12,7 @@ const app: Application = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-const allowedOrigins = ['https://keep-english.onrender.com']
+const allowedOrigins = ['https://keep-english.onrender.com', 'https://keep-english-api.onrender.com']
 const corsOptions = {
     origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
       if (!origin || allowedOrigins.indexOf(origin) !== -1) {
