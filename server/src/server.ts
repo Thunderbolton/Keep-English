@@ -35,11 +35,11 @@ app.use('/api/user', require('../routes/userRoutes.js'))
 
 if (process.env.NODE_ENV === 'production') {
   const __dirname = path.resolve();
-  app.use(express.static(path.join(__dirname, 'public')))
+  app.use(express.static(path.join(__dirname, 'client', 'public')))
 
   app.get('*', (req, res) => 
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html')))
-  
+  res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html')))
+
 } else {
   app.get('/', (req, res) => res.send('Server is ready'))
 }
