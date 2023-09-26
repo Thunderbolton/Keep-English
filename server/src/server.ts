@@ -1,4 +1,5 @@
 import express, { Application } from 'express';
+import path from 'path';
 const dotenv = require('dotenv').config()
 const cors = require('cors')
 const connectDB = require('../config/db.js')
@@ -31,5 +32,16 @@ app.use(cors(corsOptions));
 app.use('/api/entries', require('../routes/entryRoutes.js'))
 
 app.use('/api/user', require('../routes/userRoutes.js'))
+
+if (process.env.NODE_ENV === 'production') {
+  const __dirname = path.resolve();
+  app.use(express.static(path.join(__dirname, 'public')))
+
+  app.get('*', (req, res) => 
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html')))
+  
+} else {
+  app.get('/', (req, res) => res.send('Server is ready'))
+}
 
 app.listen(port, () => console.log(`server running on ${port}`));
