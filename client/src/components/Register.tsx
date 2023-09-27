@@ -47,7 +47,7 @@ const Register = () => {
         const userData = { name, email, password }
 
             try {
-                const response = await axios.post('https://keep-english-api.onrender.com/api/user/signin', userData);
+                const response = await axios.post('https://keep-english-api.onrender.com/api/user/register', userData);
 
                 if (response.data) {
                     console.log(response.data);
