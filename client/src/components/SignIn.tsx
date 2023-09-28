@@ -47,7 +47,7 @@ const SignIn = () => {
         const userData = { email, password }
 
             try {
-                const response = await axios.post('https://keep-english-api.onrender.com/api/user/signin', userData);
+                const response = await axios.post('/api/user/signin', userData);
 
                 if (response.data) {
                     localStorage.setItem('user', JSON.stringify(response.data))
