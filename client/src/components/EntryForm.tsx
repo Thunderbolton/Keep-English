@@ -59,7 +59,7 @@ const EntryForm = () => {
     }
 
     try {
-      const response = await axios.post('/api/entries', 
+      const response = await axios.post('https://keep-english-api.onrender.com/api/entries', 
         { title: title, comments: comments, category: category },
         {
           headers: {
