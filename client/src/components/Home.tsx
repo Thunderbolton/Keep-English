@@ -17,8 +17,7 @@ const Home = () => {
 
         const fetchEntries = async () => {
 
-        const apiUrl = process.env.REACT_APP_API_URL; 
-        // || 'http://localhost:5000'
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';  
         const response = await axios.get(`${apiUrl}/api/entries`, {
           headers: {
             'Authorization' : `Bearer ${user.token}`
