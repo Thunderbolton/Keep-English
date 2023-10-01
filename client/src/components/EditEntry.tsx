@@ -20,7 +20,7 @@ const EditEntry = ({ entries, onClick } : { entries: any, onClick: () => void })
     const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const response = await axios.put(`api/entries/${_id}`, {title: title, category: category, comments: comments}, {
+        const response = await axios.put(`https://keep-english-api.onrender.com/api/entries/${_id}`, {title: title, category: category, comments: comments}, {
             headers: {
               'Authorization': `Bearer ${user.token}`
             }

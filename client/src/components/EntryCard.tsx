@@ -21,7 +21,7 @@ const EntryCard = ({ entry } : { entry: any }) => {
 
 
     const deleteEntry = async () => {
-        const response = await axios.delete(`api/entries/${_id}`, {
+        const response = await axios.delete(`https://keep-english-api.onrender.com/api/entries/${_id}`, {
             headers: {
               Authorization: `Bearer ${user.token}`,
             },
