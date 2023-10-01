@@ -4,7 +4,7 @@ import axios from 'axios';
 import { EntriesContext } from '../context/EntryContext';
 import { AuthContext } from "../context/AuthContext";
 
-const EditEntry = ({ entries, onClick } : { entries: any, onClick: () => void }) => {
+const EditEntry = ({ entries, toggleEditForm } : { entries: any, toggleEditForm: () => void }) => {
 
     const { _id } = entries;
     const { dispatch } = useContext(EntriesContext)
@@ -19,7 +19,7 @@ const EditEntry = ({ entries, onClick } : { entries: any, onClick: () => void })
   
     const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
-
+        toggleEditForm()
         const response = await axios.put(`https://keep-english-api.onrender.com/api/entries/${_id}`, {title: title, category: category, comments: comments}, {
             headers: {
               'Authorization': `Bearer ${user.token}`
@@ -46,7 +46,7 @@ const EditEntry = ({ entries, onClick } : { entries: any, onClick: () => void })
                     
                     <TextField size="small" label="Comments" margin="dense" value={comments} multiline minRows={3} onChange={(e) => setComments((e.target as HTMLInputElement).value)}/>
     
-                    <Button variant="contained" color="primary" type="submit" onClick={onClick}>Finish Editing</Button>
+                    <Button variant="contained" color="primary" type="submit">Finish Editing</Button>
                 </Stack>
             </form>
           )

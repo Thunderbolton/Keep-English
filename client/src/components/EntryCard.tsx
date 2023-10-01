@@ -73,7 +73,7 @@ const EntryCard = ({ entry } : { entry: any }) => {
 
     const [editColor, setEditColor] = useState(false)
 
-    const onClick = () => {
+    const toggleEditForm = () => {
         setEditForm(!editform);
         setEditColor(!editColor);
     };
@@ -129,12 +129,12 @@ const EntryCard = ({ entry } : { entry: any }) => {
                                 </Typography>
                             ))}
                                 <Tooltip title="Edit" placement="top">                        
-                                    <IconButton onClick={onClick} sx={{color: editColor ?  "#f61d44" : "primary" }}>
+                                    <IconButton onClick={toggleEditForm} sx={{color: editColor ?  "#f61d44" : "primary" }}>
                                         <Edit />                                      
                                     </IconButton> 
                                 </Tooltip>
                              <Collapse in={editform} timeout="auto" unmountOnExit>  
-                                {editform && <EditEntry entries={entry} onClick={onClick}/>}
+                                {editform && <EditEntry entries={entry} toggleEditForm={toggleEditForm}/>}
                             </Collapse>
                         </CardContent>
                     </Collapse>
