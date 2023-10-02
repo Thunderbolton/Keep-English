@@ -11,26 +11,32 @@ const Home = () => {
     const { user } = useContext(AuthContext)
 
     useEffect(() => {
-        if(!user) {
-          return
-        }
-
-        const fetchEntries = async () => {
-
-        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';  
-        const response = await axios.get(`${apiUrl}/api/entries`, {
-          headers: {
-            'Authorization' : `Bearer ${user.token}`
+      if (!user) {
+        return;
+      }
+    
+      const fetchEntries = async () => {
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    
+        try {
+          const response = await axios.get(`${apiUrl}/api/entries`, {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }
+          });
+    
+          if (response) {
+            dispatch({ type: 'set_entries', payload: response.data });
           }
-        })
-        
-        if(response) {
-        dispatch({ type: 'set_entries', payload: response.data })
+        } catch (error) {
+          console.error('Error fetching entries:', error);
         }
-    }
-    fetchEntries()
-  },[user])
+      };
+      
+      fetchEntries();
+    }, [user]);
 
+    
     return ( 
         <>
           <EntryForm />
